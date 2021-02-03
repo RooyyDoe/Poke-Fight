@@ -34,6 +34,6 @@
     "@modules"  : "modules",
     "@public"  : "public",
     "@routes"  : "routes",
-    "@view"  : "view"
+    "@views"  : "views"
   }
 }
