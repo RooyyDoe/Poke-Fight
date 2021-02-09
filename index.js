@@ -1,5 +1,4 @@
 require("dotenv").config()
-require('module-alias/register')
 
 const port = process.env.PORT || 3000
 const express = require('express')
@@ -13,9 +12,10 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 const router = {
-    login: require('@routes/login'),
-    lobby: require('@routes/lobby'),
-    battle: require('@routes/battle'),
+    login: require('./routes/login'),
+    lobby: require('./routes/lobby'),
+    battle: require('./routes/battle'),
+    pickYourPokemon: require('./routes/pickYourPokemon'),
 }
 
 const hbs = exphbs.create({
@@ -33,6 +33,9 @@ app.set('view engine', 'hbs')
 // Navigation
 
 app.get('/', router.login)
+app.get('/lobby', router.lobby)
+app.get('/battle', router.battle)
+app.get('/pickYourPokemon', router.pickYourPokemon)
 
     
 

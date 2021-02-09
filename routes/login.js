@@ -1,8 +1,8 @@
 const express = require('express')
-const router = express.Router()
+const loginRoute = express.Router()
 
-router.use( (req, res) => {
+loginRoute.use( (req, res) => {
     res.render('login')
 })
 
-module.exports = router
+module.exports = loginRoute
