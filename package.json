@@ -14,11 +14,14 @@
     "socket.io": "^3.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "watchify": "^4.0.0"
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "watch" : "npx watchify public/js/main.js -o public/js/bundle.js"
+
   },
   "repository": {
     "type": "git",

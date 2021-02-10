@@ -1,12 +1,8 @@
-const data = require('../modules/api/pokemonData')
+const express = require('express')
+const battleRoute = express.Router()
 
-const battleRoute = async (req, res) => {
-    const pokemons = await data.pokemons()
-    console.log(pokemons)
-
-    res.render('battle',  {
-         pokemons: pokemons.results
-    })
-}
+battleRoute.use( (req, res) => {
+    res.render('battle')
+})
 
 module.exports = battleRoute
