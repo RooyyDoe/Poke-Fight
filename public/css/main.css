@@ -31,6 +31,52 @@
   padding: 0 20px;
   box-sizing: border-box;
 }
+.container-full {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.container-leftside {
+  width: 40%;
+  z-index: 2;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+}
+.line {
+  background-color: rgb(255, 255, 255);
+  width: 10%;
+  height: 1000px;
+  margin-top: -15px;
+  margin-left: -70px;
+  transform: rotate(8deg);
+  border-right: 5px solid black;
+  z-index: 0;
+}
+.logo-container {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.container-rightside {
+  width: 70%;
+  height: 100vh;
+  /* background: rgb(219, 8, 41); */
+}
+.inside-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 500px;
+  width: 50%;
+  margin: 120px auto;
+  padding: 110px 50px;
+  border: 5px solid black;
+  place-content: center;
+}
 .column,
 .columns {
   width: 100%;
@@ -48,6 +94,9 @@ html {
   font-size: 62.5%;
 }
 body {
+  background-color: rgb(219, 8, 41);
+  overflow: hidden;
+  margin: 0;
   font-size: 1.5em;
   line-height: 1.6;
   font-weight: 400;
@@ -99,6 +148,39 @@ h6 {
   letter-spacing: 0;
 }
 
+.logo-container > h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 3rem;
+  color: black;
+}
+
+.intro-text > p {
+  font-family: "Roboto", sans-serif;
+  color: black;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.login-title-text > h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 3rem;
+  margin: 0;
+  color: black;
+}
+
+.login-title-text > p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+  margin-top: -5px;
+  margin-left: 3px;
+  font-weight: 400;
+}
+
+.intro-text > p > span {
+  font-weight: 900;
+  font-style: italic;
+}
+
 /* Larger than phablet */
 @media (min-width: 550px) {
   h1 {
@@ -140,6 +222,61 @@ a:hover {
 /* Forms
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+.login-title-text {
+  width: 100%;
+  text-align: center;
+}
+
+.login-form {
+  text-align: center;
+}
+
+.login-form > form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.gamer-tag > label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.gamer-tag > input {
+  margin: 10px;
+  border-radius: 50px;
+  border: 2px solid rgb(219, 8, 41);
+  padding: 10px 50px;
+  outline: none;
+}
+
+.pokemon-gyms > label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.pokemon-gyms > select {
+  font-family: "Roboto", sans-serif;
+  font-weight: lighter;
+  font-size: 2rem;
+  padding: 5px 50px;
+  margin: 10px;
+  border-radius: 50px;
+  border: 2px solid rgb(219, 8, 41);
+}
+
+.gender-checkboxes {
+  margin-bottom: 10px;
+}
+
+.gender-checkboxes > label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
 /* Spacing
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -149,6 +286,31 @@ a:hover {
 /* Misc
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+.intro-text {
+  text-align: center;
+  padding: 120px 40px;
+}
+
+#logo-image {
+  width: 400px;
+  height: 150px;
+}
+
+.image-list {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pokemon-image {
+  width: 100px;
+  height: 100px;
+}
+
+.background-image {
+  width: 100%;
+  vertical-align: top;
+}
 /* Media Queries
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

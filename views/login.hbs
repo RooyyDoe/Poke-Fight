@@ -1,1 +1,65 @@
-<h1>Example App: Home</h1>
+<div class="container-full flex-center">
+    <div class="container-leftside">
+        <div class="logo-container">
+            <img id="logo-image" src="/images/pokemon_logo.png" alt="Pokemon logo">
+            <h2>Battle Simulator ™</h2>
+        </div>
+        <div class="intro-text">
+            <p>Challenge your friends to a pokemon battle in this <span>pokemon battle simulator</span> and find out who
+                is the best pokemon trainer.
+            </p>
+        </div>
+        <div class="image-list">
+            <img class="pokemon-image" src="/images/icons/bullbasaur.svg" alt="bulbasaur">
+            <img class="pokemon-image" src="/images/icons/charmander.svg" alt="charmander">
+            <img class="pokemon-image" src="/images/icons/pikachu-2.svg" alt="pikachu">
+            <img class="pokemon-image" src="/images/icons/squirtle.svg" alt="squirtle">
+        </div>
+    </div>
+    <div class="line"></div>
+    <div class="container-rightside">
+        <div class="inside-container">
+            <div class="login-title-text">
+                <h2>Welcome Trainer!</h2>
+                <p>Fill in the form & Sign up</p>
+            </div>
+            <div class="login-form">
+                <form>
+                    <div class="gamer-tag">
+                        <label for="gamer-tag">Enter your gamer tag</label><br>
+                        <input type="text" id="gamer-tag" name="gamer-tag">
+                    </div>
+                    <div class="pokemon-gyms">
+                        <label for="gamer-tag">Select your gym lobby</label><br>
+                        <select name="pokemon-gyms" id="pokemon-gyms">
+                            <option value="pewter-gym">Pewter Gym</option>
+                            <option value="cerulean-gym">Cerulean Gym</option>
+                            <option value="vermilion-gym">Vermilion Gym</option>
+                            <option value="celadon-gym">Celadon Gym</option>
+                            <option value="fuchsia-gym">Fuchsia Gym</option>
+                            <option value="saffron-gym">Saffron Gym</option>
+                            <option value="cinnabar-gym">Cinnabar Gym</option>
+                            <option value="viridian-gym">Viridian Gym</option>
+                        </select>
+                    </div>
+                    <div class="gender-checkboxes">
+                        <label for="gamer-tag">Select your gender</label><br>
+                        <input type="checkbox" id="girl-trainer" name="girl-trainer" value="girl">
+                        <label for="vehicle1"> Girl trainer</label>
+                        <input type="checkbox" id="boy-trainer" name="boy-trainer" value="boy">
+                        <label for="vehicle2"> Boy trainer</label>
+                    </div>
+                    <div class="submit-button">
+                        <button class="join-button">Join lobby</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{!-- <div id="show-error">
+        <!-- TODO: Make a error message if the pokemon doesn't exists -->
+    </div> --}}
+
+</div>
+
+<script src="/js/bundle.js"></script>

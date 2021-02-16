@@ -1,8 +1,14 @@
-const pokemon = require('../../modules/pokemonData')
+import * as run from './socket-io/socket'
 
-const search_bar = document.getElementById('search-bar')
-const search_button = document.getElementById('search-button')
+const socket = io()
 
-console.log('test')
+run.sockets(socket)
 
-search_button.addEventListener("click", () => pokemon(search_bar.value))
+// const pokemon = require('../../modules/pokemonData')
+    
+// const search_bar = document.getElementById('search-bar')
+// const search_button = document.getElementById('search-button')
+
+// console.log('test')
+
+// search_button.addEventListener("click", () => pokemon(search_bar.value))
