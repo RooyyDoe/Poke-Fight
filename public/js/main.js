@@ -1,8 +1,20 @@
-import * as run from './socket-io/socket'
+import * as utils from './utils/utils.mjs'
+
+// get user name, gym and gender out of the login
+const { username, gym, gender } = Qs.parse(location.search, {
+    ignoreQueryPrefix: true
+})
+
+console.log(username, gym, gender)
 
 const socket = io()
 
-run.sockets(socket)
+
+socket.on('notification', notification => {
+    console.log('test', notification )
+    utils.appendMessage(notification)  
+    utils.fadeAndRemoveMessage()
+})
 
 // const pokemon = require('../../modules/pokemonData')
     

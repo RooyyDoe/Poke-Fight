@@ -23,21 +23,16 @@
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.container {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-.container-full {
+
+.login-container {
   display: flex;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
+  background-color: rgb(219, 8, 41);
 }
-.container-leftside {
+
+.login-container-leftside {
   width: 40%;
   z-index: 2;
   height: 100vh;
@@ -51,7 +46,7 @@
   margin-left: -70px;
   transform: rotate(8deg);
   border-right: 5px solid black;
-  z-index: 0;
+  z-index: 1;
 }
 .logo-container {
   padding-top: 100px;
@@ -60,10 +55,11 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-.container-rightside {
+.login-container-rightside {
   width: 70%;
   height: 100vh;
-  /* background: rgb(219, 8, 41); */
+  z-index: 0;
+  background-color: rgb(219, 8, 41);
 }
 .inside-container {
   display: flex;
@@ -77,11 +73,63 @@
   border: 5px solid black;
   place-content: center;
 }
-.column,
-.columns {
+
+.lobby-container {
+  display: flex;
   width: 100%;
-  float: left;
+  margin: 0 auto;
   box-sizing: border-box;
+}
+
+.lobby-container-leftside {
+  background-image: url(/images/pewter_city.png);
+  background-repeat: no-repeat;
+  background-size: 1153px 800px;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  height: 100vh;
+}
+
+.lobby-container-rightside {
+  display: flex;
+  border-left: 5px solid rgba(0, 0, 0);
+  width: 20%;
+  height: 100vh;
+}
+
+.topside-inside-container {
+  width: 100%;
+  height: 60%;
+  border-bottom: 5px solid rgba(0, 0, 0);
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px 5px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.75);
+  background-color: rgb(219, 8, 41);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+}
+
+.trainer-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.trainer-card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
+  border: 2px solid rgb(219, 8, 41);
+  border-left: 20px solid rgb(219, 8, 41);
+  border-right: 20px solid rgb(219, 8, 41);
+  border-radius: 5px;
 }
 
 /* Base Styles
@@ -94,14 +142,12 @@ html {
   font-size: 62.5%;
 }
 body {
-  background-color: rgb(219, 8, 41);
   overflow: hidden;
   margin: 0;
   font-size: 1.5em;
   line-height: 1.6;
   font-weight: 400;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #222;
 }
 
@@ -149,27 +195,23 @@ h6 {
 }
 
 .logo-container > h2 {
-  font-family: "Roboto", sans-serif;
   font-size: 3rem;
   color: black;
 }
 
 .intro-text > p {
-  font-family: "Roboto", sans-serif;
   color: black;
   font-weight: 400;
   font-size: 2rem;
 }
 
 .login-title-text > h2 {
-  font-family: "Roboto", sans-serif;
   font-size: 3rem;
   margin: 0;
   color: black;
 }
 
 .login-title-text > p {
-  font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
   margin-top: -5px;
   margin-left: 3px;
@@ -179,6 +221,38 @@ h6 {
 .intro-text > p > span {
   font-weight: 900;
   font-style: italic;
+}
+
+.logo-section > h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-left: 90px;
+  margin-top: -15px;
+}
+
+.inside-title > h2 {
+  color: rgb(255, 255, 255);
+  letter-spacing: 2px;
+  font-size: 2.5rem;
+  margin: 0;
+  margin-left: -10px;
+  font-weight: 300;
+}
+
+.inside-title > p {
+  color: rgb(255, 255, 255);
+  letter-spacing: 1px;
+  font-size: 1.8rem;
+  margin-top: -8px;
+  font-weight: 400;
+}
+
+.trainer-card > p {
+  letter-spacing: 2px;
+  font-size: 2rem;
+  margin: 0;
+  padding-left: 20px;
+  font-weight: 400;
 }
 
 /* Larger than phablet */
@@ -282,6 +356,24 @@ a:hover {
 
 /* Utilities
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.join-message {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: rgba(0, 0, 0);
+  padding: 10px 20px;
+  background-color: rgb(255, 255, 255, 0.9);
+  border-left: 20px solid rgb(219, 8, 41);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 10px 0px 0px 10px;
+  margin: 30px 20px;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+
+.inside-title {
+  padding-top: 10px;
+}
 
 /* Misc
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -311,6 +403,25 @@ a:hover {
   width: 100%;
   vertical-align: top;
 }
+
+.logo-section > img {
+  padding: 10px;
+  width: 250px;
+  height: 100px;
+}
+
+.inside-icon > img {
+  width: 45px;
+  height: 45px;
+}
+
+.trainer-card > img {
+  border: 2px solid rgb(219, 8, 41);
+  border-radius: 100px;
+  width: 32px;
+  height: 32px;
+}
+
 /* Media Queries
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

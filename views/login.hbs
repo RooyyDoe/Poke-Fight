@@ -1,5 +1,5 @@
-<div class="container-full flex-center">
-    <div class="container-leftside">
+<div class="login-container">
+    <div class="login-container-leftside">
         <div class="logo-container">
             <img id="logo-image" src="/images/pokemon_logo.png" alt="Pokemon logo">
             <h2>Battle Simulator ™</h2>
@@ -17,21 +17,21 @@
         </div>
     </div>
     <div class="line"></div>
-    <div class="container-rightside">
+    <div class="login-container-rightside">
         <div class="inside-container">
             <div class="login-title-text">
                 <h2>Welcome Trainer!</h2>
                 <p>Fill in the form & Sign up</p>
             </div>
             <div class="login-form">
-                <form>
+                <form action="/lobby">
                     <div class="gamer-tag">
-                        <label for="gamer-tag">Enter your gamer tag</label><br>
-                        <input type="text" id="gamer-tag" name="gamer-tag">
+                        <label for="username">Enter your gamer tag</label><br>
+                        <input type="text" id="gamer-tag" name="username">
                     </div>
                     <div class="pokemon-gyms">
-                        <label for="gamer-tag">Select your gym lobby</label><br>
-                        <select name="pokemon-gyms" id="pokemon-gyms">
+                        <label for="gym">Select your gym lobby</label><br>
+                        <select name="gym" id="pokemon-gyms">
                             <option value="pewter-gym">Pewter Gym</option>
                             <option value="cerulean-gym">Cerulean Gym</option>
                             <option value="vermilion-gym">Vermilion Gym</option>
@@ -43,23 +43,18 @@
                         </select>
                     </div>
                     <div class="gender-checkboxes">
-                        <label for="gamer-tag">Select your gender</label><br>
-                        <input type="checkbox" id="girl-trainer" name="girl-trainer" value="girl">
-                        <label for="vehicle1"> Girl trainer</label>
-                        <input type="checkbox" id="boy-trainer" name="boy-trainer" value="boy">
-                        <label for="vehicle2"> Boy trainer</label>
+                        <p>Select your gender</p>
+                        <input type="radio" id="girl" name="gender" value="girl">
+                        <label for="vehicle1"> Girl</label>
+                        <input type="radio" id="boy" name="gender" value="boy">
+                        <label for="vehicle2"> Boy</label>
                     </div>
                     <div class="submit-button">
-                        <button class="join-button">Join lobby</button>
+                        <button type="submit" class="join-button">Join lobby</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    {{!-- <div id="show-error">
-        <!-- TODO: Make a error message if the pokemon doesn't exists -->
-    </div> --}}
 
 </div>
-
-<script src="/js/bundle.js"></script>
