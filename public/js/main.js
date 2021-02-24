@@ -1,19 +1,34 @@
 import * as utils from './utils/utils.mjs'
 
-// get user name, gym and gender out of the login
-const { username, gym, gender } = Qs.parse(location.search, {
-    ignoreQueryPrefix: true
-})
-
-console.log(username, gym, gender)
-
 const socket = io()
 
+// get user name, gym and gender out of the login
+// const { username, gym, gender } = Qs.parse(location.search, {
+//     ignoreQueryPrefix: true
+// })
+
+const infoElement = document.getElementById('user-info')
+const userInfo = {
+    user: infoElement.getAttribute('user-name'),
+    gym: infoElement.getAttribute('gym-name'),
+    gender: infoElement.getAttribute('gender')
+} 
+
+console.log(userInfo.user, userInfo.gym, userInfo.gender)
+
+
+socket.emit('joinLobby', userInfo)
+
+// get gym and users
+
+// socket.on('gymUsers', ({gym, users}) => {
+     
+// })
 
 socket.on('notification', notification => {
     console.log('test', notification )
     utils.appendMessage(notification)  
-    utils.fadeAndRemoveMessage()
+    // utils.fadeAndRemoveMessage()
 })
 
 // const pokemon = require('../../modules/pokemonData')

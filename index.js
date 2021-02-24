@@ -30,14 +30,20 @@ socket(io)
 // public folder for the assets
 app.use(express.static(path.join(__dirname + "/public")))
 
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+)
+
 // template engine 
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 
 // Navigation
 app.get('/', router.login)
-app.get('/lobby', router.lobby)
-app.get('/battle', router.battle)
+app.post('/lobby', router.lobby)
+app.post('/battle', router.battle)
 app.get('/pickYourPokemon', router.pickYourPokemon)
 
 // starting up the server

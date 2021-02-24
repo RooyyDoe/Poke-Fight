@@ -1,4 +1,4 @@
-// const get = require('./pokemonData')
+const { userJoin, getCurrentUser, userLeave, getGymUsers} = require('./users')
 
 module.exports = (io) => { 
 
@@ -6,19 +6,40 @@ module.exports = (io) => {
 
         console.log('Socket is connected..')
 
-        // Welcome current user
+        socket.on('joinLobby', ({user, gym, gender}) => {
 
-        socket.emit('notification', 'Welcome to Pokémon Battle Simulator')
+            const userInfo = userJoin(socket.id, user, gym, gender)
 
-        // Broadcast when a user connects
+            console.log('test', userInfo.user)
 
-        socket.broadcast.emit('notification', 'A user has joined the gym')
+            socket.join(userInfo.gym)
+            
+            // Welcome current user
 
-        // Runs when client disconnects
+            socket.emit('notification', 'Welcome to Pokémon Battle Simulator')
 
-        socket.on('disconnect', () => {
-            io.emit('notification', 'A user has left the chat')
+            // Broadcast when a user connects
+
+            socket.broadcast.to(userInfo.gym).emit('notification',  `${userInfo.user} has joined the gym`)
+
+            // send users and gym info
+
+            io.to(userInfo.gym).emit('gymUsers', {gym: userInfo.gym, users: getGymUsers(userInfo.gym)})
+
+            // Runs when client disconnects
+
+            socket.on('disconnect', () => {
+                const user = userLeave(socket.id)
+
+                if (user) {
+                    io.to(userInfo.gym).emit('notification', `${userInfo.user} has left the gym`)
+                }
+
+                io.to(userInfo.gym).emit('gymUsers', {gym: userInfo.gym, users: getGymUsers(userInfo.gym)})
+            })
         })
+
+
 
     });
 

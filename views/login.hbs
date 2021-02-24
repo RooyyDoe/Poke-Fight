@@ -1,60 +1,68 @@
-<div class="login-container">
-    <div class="login-container-leftside">
-        <div class="logo-container">
-            <img id="logo-image" src="/images/pokemon_logo.png" alt="Pokemon logo">
-            <h2>Battle Simulator ™</h2>
-        </div>
-        <div class="intro-text">
-            <p>Challenge your friends to a pokemon battle in this <span>pokemon battle simulator</span> and find out who
-                is the best pokemon trainer.
-            </p>
-        </div>
-        <div class="image-list">
-            <img class="pokemon-image" src="/images/icons/bullbasaur.svg" alt="bulbasaur">
-            <img class="pokemon-image" src="/images/icons/charmander.svg" alt="charmander">
-            <img class="pokemon-image" src="/images/icons/pikachu-2.svg" alt="pikachu">
-            <img class="pokemon-image" src="/images/icons/squirtle.svg" alt="squirtle">
-        </div>
-    </div>
-    <div class="line"></div>
-    <div class="login-container-rightside">
-        <div class="inside-container">
-            <div class="login-title-text">
-                <h2>Welcome Trainer!</h2>
-                <p>Fill in the form & Sign up</p>
-            </div>
-            <div class="login-form">
-                <form action="/lobby">
-                    <div class="gamer-tag">
-                        <label for="username">Enter your gamer tag</label><br>
-                        <input type="text" id="gamer-tag" name="username">
-                    </div>
-                    <div class="pokemon-gyms">
-                        <label for="gym">Select your gym lobby</label><br>
-                        <select name="gym" id="pokemon-gyms">
-                            <option value="pewter-gym">Pewter Gym</option>
-                            <option value="cerulean-gym">Cerulean Gym</option>
-                            <option value="vermilion-gym">Vermilion Gym</option>
-                            <option value="celadon-gym">Celadon Gym</option>
-                            <option value="fuchsia-gym">Fuchsia Gym</option>
-                            <option value="saffron-gym">Saffron Gym</option>
-                            <option value="cinnabar-gym">Cinnabar Gym</option>
-                            <option value="viridian-gym">Viridian Gym</option>
-                        </select>
-                    </div>
-                    <div class="gender-checkboxes">
-                        <p>Select your gender</p>
-                        <input type="radio" id="girl" name="gender" value="girl">
-                        <label for="vehicle1"> Girl</label>
-                        <input type="radio" id="boy" name="gender" value="boy">
-                        <label for="vehicle2"> Boy</label>
-                    </div>
-                    <div class="submit-button">
-                        <button type="submit" class="join-button">Join lobby</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<body id="lobby">
 
-</div>
+    <main>
+
+        <div class="login-container">
+            <div class="login-container-leftside">
+                <div class="logo-container">
+                    <img id="logo-image" src="/images/pokemon_logo.png" alt="Pokemon logo">
+                    <h2>Battle Simulator ™</h2>
+                </div>
+                <div class="intro-text">
+                    <p>Challenge your friends to a pokemon battle in this <span>pokemon battle simulator</span> and find
+                        out who
+                        is the best pokemon trainer.
+                    </p>
+                </div>
+                <div class="image-list">
+                    <img class="pokemon-image" src="/images/icons/bullbasaur.svg" alt="bulbasaur">
+                    <img class="pokemon-image" src="/images/icons/charmander.svg" alt="charmander">
+                    <img class="pokemon-image" src="/images/icons/pikachu-2.svg" alt="pikachu">
+                    <img class="pokemon-image" src="/images/icons/squirtle.svg" alt="squirtle">
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="login-container-rightside">
+                <div class="inside-container">
+                    <div class="login-title-text">
+                        <h2>Welcome Trainer!</h2>
+                        <p>Fill in the form & Sign up</p>
+                    </div>
+                    <div class="login-form">
+                        <form action="/lobby" method="POST">
+                            <div class="gamer-tag">
+                                <label for="username">Enter your gamer tag</label><br>
+                                <input type="text" id="gamer-tag" name="username">
+                            </div>
+                            <div class="pokemon-gyms">
+                                <label for="gym">Select your gym lobby</label><br>
+                                <select name="gym" id="pokemon-gyms">
+                                    <option value="pewter-gym">Pewter Gym</option>
+                                    <option value="cerulean-gym">Cerulean Gym</option>
+                                    <option value="vermilion-gym">Vermilion Gym</option>
+                                    <option value="celadon-gym">Celadon Gym</option>
+                                    <option value="fuchsia-gym">Fuchsia Gym</option>
+                                    <option value="saffron-gym">Saffron Gym</option>
+                                    <option value="cinnabar-gym">Cinnabar Gym</option>
+                                    <option value="viridian-gym">Viridian Gym</option>
+                                </select>
+                            </div>
+                            <div class="gender-checkboxes">
+                                <p>Select your gender</p>
+                                <input type="radio" id="girl" name="gender" value="girl">
+                                <label for="vehicle1"> Girl</label>
+                                <input type="radio" id="boy" name="gender" value="boy">
+                                <label for="vehicle2"> Boy</label>
+                            </div>
+                            <div class="submit-button">
+                                <button type="submit" class="join-button">Join lobby</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+</body>
