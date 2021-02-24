@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const socket = require('./modules/socket')
+const helper = require('./modules/helper')
 
 const port = process.env.PORT || 3000
 const express = require('express')
@@ -21,7 +22,10 @@ const router = {
 // Defining my template engine
 const hbs = exphbs.create({
     extname: '.hbs',
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: {
+        ifEqual: helper.isEqualHelper
+    }
 })
 
 //setting up the sockets

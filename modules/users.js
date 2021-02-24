@@ -2,14 +2,14 @@ const users = [];
 
 // join user into the pokemon lobby
 
-const userJoin = (id, user, gym, gender) => {
-    const userInfo = { id, user, gym, gender}
+const joinGymLobby = (id, user, gym, gender) => {
+    const userObj = { id, user, gym, gender}
 
-    users.push(userInfo)
+    users.push(userObj)
 
-    console.log('userList' , userInfo.user)
+    console.log('userList' , userObj)
 
-    return userInfo
+    return userObj
 }
 
 // get current user
@@ -35,7 +35,7 @@ const getGymUsers = (gym) => {
 }
 
 module.exports = {
-    userJoin,
+    joinGymLobby,
     getCurrentUser,
     userLeave,
     getGymUsers,

@@ -24,13 +24,18 @@
                             <p>Trainers</p>
                         </div>
                     </div>
-                    <div class="trainer-container">
-                        <div class="trainer-card">
-                            <img src="/images/pokemon_girl_trainer.png" alt="Player Icon">
-                            <p> {{userList.username}} </p>
-
-                        </div>
-                    </div>
+                    {{!-- {{#each user_info.users}} --}}
+                    <ul id="trainer-container">
+                        {{!-- <div class="trainer-card">
+                            {{#ifEqual gender "girl"}}
+                            <img src="/images/pokemon_girl_trainer.png" alt="Girl Player Icon">
+                            {{else}}
+                            <img src="/images/pokemon_boy_trainer.png" alt="Boy Player Icon">
+                            {{/ifEqual}}
+                            <p> {{user}} </p>
+                        </div> --}}
+                    </ul>
+                    {{!-- {{/each}} --}}
                 </div>
                 <div class="bottomside-inside-container"></div>
             </div>

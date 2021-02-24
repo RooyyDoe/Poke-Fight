@@ -20,3 +20,25 @@ export const fadeAndRemoveMessage = () => {
             lastOutput.remove()
     }, 5000);
 }
+
+export const userList = (users, currentUser) => {
+	const userList = document.getElementById('trainer-container')
+    console.log('userList', users)
+	removeList(userList)
+
+	users.forEach(user => {
+		const li = document.createElement('li')
+        console.log('test', user)
+        li.classList.add('trainer-card')
+		li.textContent = user.user
+		userList.append(li)
+
+		// if (user.name === currentUser) {
+		// 	li.classList.add('current-user')
+		// }
+	})
+}
+
+const removeList = (list) => {
+	list.innerHTML = ""
+}
