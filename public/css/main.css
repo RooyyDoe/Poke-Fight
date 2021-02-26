@@ -82,17 +82,35 @@
 }
 
 .lobby-container-leftside {
-  background-image: url(/images/pewter_city.png);
-  background-repeat: no-repeat;
-  background-size: 1153px 800px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  z-index: 2;
   width: 80%;
   height: 100vh;
 }
 
+.lobby-container > img {
+  position: absolute;
+  z-index: 1;
+  width: 1153px;
+  height: 800px;
+}
+
+.lobby-container > h2 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  margin: 10px;
+  padding: 10px;
+  z-index: 10;
+  font-size: 2.5rem;
+}
+
 .lobby-container-rightside {
   display: flex;
+  z-index: 2;
   border-left: 5px solid rgba(0, 0, 0);
   width: 20%;
   height: 100vh;
@@ -117,6 +135,7 @@
 #trainer-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   padding: 10px;
 }
 
@@ -124,12 +143,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 5px;
+  padding: 0px 10px;
   width: 100%;
   border: 2px solid rgb(219, 8, 41);
   border-left: 20px solid rgb(219, 8, 41);
   border-right: 20px solid rgb(219, 8, 41);
   border-radius: 5px;
+  margin: -5px 5px 15px 5px;
 }
 
 /* Base Styles
@@ -223,13 +243,6 @@ h6 {
   font-style: italic;
 }
 
-.logo-section > h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding-left: 90px;
-  margin-top: -15px;
-}
-
 .inside-title > h2 {
   color: rgb(255, 255, 255);
   letter-spacing: 2px;
@@ -250,8 +263,7 @@ h6 {
 .trainer-card > p {
   letter-spacing: 2px;
   font-size: 2rem;
-  margin: 0;
-  padding-left: 20px;
+  margin: 5px 5px 5px 5px;
   font-weight: 400;
 }
 
@@ -404,12 +416,6 @@ a:hover {
   vertical-align: top;
 }
 
-.logo-section > img {
-  padding: 10px;
-  width: 250px;
-  height: 100px;
-}
-
 .inside-icon > img {
   width: 45px;
   height: 45px;
@@ -417,6 +423,7 @@ a:hover {
 
 .trainer-card > img {
   border: 2px solid rgb(219, 8, 41);
+  margin-right: 15px;
   border-radius: 100px;
   width: 32px;
   height: 32px;

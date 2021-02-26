@@ -9,9 +9,6 @@ const userInfo = {
     gender: infoElement.getAttribute('gender')
 } 
 
-console.log(userInfo.user, userInfo.gym, userInfo.gender)
-
-
 socket.emit('joinLobby', userInfo)
 
 // get gym and users

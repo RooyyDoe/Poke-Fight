@@ -16,9 +16,7 @@ lobbyRoute.use( (req, res) => {
         gender,
     }
 
-    console.log('users', users)
-
-    res.render('lobby', {
+    res.render(`${gym}`, {
         user_info
     })
 })

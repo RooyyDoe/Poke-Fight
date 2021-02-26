@@ -23,22 +23,31 @@ export const fadeAndRemoveMessage = () => {
 
 export const userList = (users, currentUser) => {
 	const userList = document.getElementById('trainer-container')
-    console.log('userList', users)
-	removeList(userList)
+    console.log(users.gender)
+	removeUserList(userList)
 
 	users.forEach(user => {
-		const li = document.createElement('li')
-        console.log('test', user)
-        li.classList.add('trainer-card')
-		li.textContent = user.user
-		userList.append(li)
+		const list = document.createElement('li')
+        const img = document.createElement('img')
+        const p = document.createElement('p')
+        list.classList.add('trainer-card')
 
-		// if (user.name === currentUser) {
-		// 	li.classList.add('current-user')
-		// }
+        if(user.gender === "boy") {
+            img.src = `/images/${user.gender}.png`
+            p.textContent = user.user
+        }
+
+        img.src = `/images/${user.gender}.png`
+        p.textContent = user.user
+
+        userList.append(list)
+        list.append(img)
+        list.append(p)
+
 	})
+
 }
 
-const removeList = (list) => {
+const removeUserList = (list) => {
 	list.innerHTML = ""
 }

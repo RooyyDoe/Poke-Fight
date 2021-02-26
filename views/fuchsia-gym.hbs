@@ -1,0 +1,36 @@
+<body id="lobby">
+
+    <input type="hidden" id="user-info" user-name="{{ user_info.username }}" gym-name="{{ user_info.gymName }}"
+        gender="{{ user_info.gender }}">
+
+    <main>
+        <div class="lobby-container">
+            <h2>Fuchsia City</h2>
+            <img src="/images/fuchsia_city.png" alt="Pokemon Map">
+            <div class="lobby-container-leftside">
+                <div class="join-element">
+                </div>
+            </div>
+            <div class="lobby-container-rightside">
+                <div class="topside-inside-container">
+                    <div class="title-container">
+                        <div class="inside-icon">
+                            <img src="/images/icons/pokeball.svg" alt="Pokemon Ball">
+                        </div>
+                        <div class="inside-title">
+                            <h2>Pokemon</h2>
+                            <p>Trainers</p>
+                        </div>
+                    </div>
+                    <ul id="trainer-container">
+                    </ul>
+                </div>
+                <div class="bottomside-inside-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/js/main.js"></script>
+
+</body>

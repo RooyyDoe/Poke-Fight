@@ -30,6 +30,9 @@ module.exports = (io) => {
 
             if (user) {
                 io.to(user.gym).emit('notification', `${user.user} has left the gym`)
+
+                const users = getGymUsers(user.gym)
+                io.to(user.gym).emit('gymUsers', users)
             }
 
         })
