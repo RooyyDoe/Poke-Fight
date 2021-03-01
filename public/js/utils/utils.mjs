@@ -1,4 +1,4 @@
-export const appendMessage = (notification) => {
+export const appendLobbyMessage = (notification) => {
     const output = document.querySelector('.join-element')
     const joinMessage = document.createElement('p')
     joinMessage.classList.add('join-message')
@@ -6,6 +6,16 @@ export const appendMessage = (notification) => {
 
     output.append(joinMessage)
 }
+
+export const appendGameMessage = (msg) => {
+    const output = document.querySelector('.battle-element')
+    const battleMessage = document.createElement('p')
+    battleMessage.classList.add('battle-message')
+    battleMessage.innerText = msg
+
+    output.append(battleMessage)
+}
+
 
 export const fadeAndRemoveMessage = () => {
     const lastOutput = document.querySelector('.join-message:last-child')
@@ -23,7 +33,8 @@ export const fadeAndRemoveMessage = () => {
 
 export const userList = (users, currentUser) => {
 	const userList = document.getElementById('trainer-container')
-    console.log(users.gender)
+    const startButton = document.querySelector('.start-button')
+
 	removeUserList(userList)
 
 	users.forEach(user => {
@@ -43,8 +54,13 @@ export const userList = (users, currentUser) => {
         userList.append(list)
         list.append(img)
         list.append(p)
-
 	})
+
+    if (users.length === 2) {
+        startButton.disabled = false
+    } else {
+        startButton.disabled = true
+    }
 
 }
 

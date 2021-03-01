@@ -1,7 +1,6 @@
 require("dotenv").config()
 
 const socket = require('./modules/socket')
-const helper = require('./modules/helper')
 
 const port = process.env.PORT || 3000
 const express = require('express')
@@ -15,17 +14,12 @@ const io = require('socket.io')(server)
 const router = {
     login: require('./routes/login'),
     lobby: require('./routes/lobby'),
-    battle: require('./routes/battle'),
-    pickYourPokemon: require('./routes/pickYourPokemon'),
 }
 
 // Defining my template engine
 const hbs = exphbs.create({
     extname: '.hbs',
     defaultLayout: 'main',
-    helpers: {
-        ifEqual: helper.isEqualHelper
-    }
 })
 
 //setting up the sockets
@@ -47,8 +41,6 @@ app.set('view engine', 'hbs')
 // Navigation
 app.get('/', router.login)
 app.post('/lobby', router.lobby)
-app.post('/battle', router.battle)
-app.get('/pickYourPokemon', router.pickYourPokemon)
 
 // starting up the server
 server.listen(port, () => console.log(`App now listening on port ${port}`))

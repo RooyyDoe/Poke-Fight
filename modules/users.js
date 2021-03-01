@@ -7,7 +7,7 @@ const joinGymLobby = (id, user, gym, gender) => {
 
     users.push(userObj)
 
-    console.log('userList' , userObj)
+    // console.log('userList' , userObj)
 
     return userObj
 }
