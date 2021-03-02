@@ -7,11 +7,11 @@ export const appendLobbyMessage = (notification) => {
     output.append(joinMessage)
 }
 
-export const appendGameMessage = (msg) => {
+export const appendGameMessage = (message) => {
     const output = document.querySelector('.battle-element')
     const battleMessage = document.createElement('p')
     battleMessage.classList.add('battle-message')
-    battleMessage.innerText = msg
+    battleMessage.innerText = message
 
     output.append(battleMessage)
 }
@@ -45,11 +45,11 @@ export const userList = (users, currentUser) => {
 
         if(user.gender === "boy") {
             img.src = `/images/${user.gender}.png`
-            p.textContent = user.user
+            p.textContent = user.username
         }
 
         img.src = `/images/${user.gender}.png`
-        p.textContent = user.user
+        p.textContent = user.username
 
         userList.append(list)
         list.append(img)

@@ -7,7 +7,7 @@ lobbyRoute.use( (req, res) => {
     const gym = req.body.gym
     const gender = req.body.gender
 
-    const users = userData.getGymUsers(gym)
+    const users = userData.getUsersInGym(gym)
 
     const user_info = {
         username: user,
