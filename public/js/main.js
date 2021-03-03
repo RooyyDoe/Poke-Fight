@@ -2,12 +2,6 @@ import * as utils from './utils/utils.mjs'
 
 const socket = io()
 
-let currentPlayer = 'user'
-let playerNum = 0
-let ready = false
-let enemyReady = false
-let attacked = -1
-
 const infoElement = document.getElementById('user-info')
 const userInfo = {
     username: infoElement.getAttribute('user-name'),
@@ -32,7 +26,7 @@ if (userInfo) {
         lobby.classList.add('fade-out')
         battle.classList.add('fade-in')
 
-        socket.emit('battle')
+        socket.emit('battle', userInfo)
     });
 
 }
@@ -49,12 +43,20 @@ const renderTurnMessage = () => {
 
 const attackButton = document.querySelector('.attack-button')
 
+// attackButton.addEventListener('click', (event) => {
+//     event.preventDefault();
+
+//     let message = `${userInfo.username}'s ${userInfo.pokemon.name} attacked for 100 damage`
+//     document.querySelector(".attack-button").disabled = true
+
+//     socket.emit('game-messages', message);
+//     socket.emit('game-messages', 'Halloooo');
+// })
+
 attackButton.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    let message = `${userInfo.username}'s ${userInfo.pokemon.name} attacked for 100 damage`
-
-    socket.emit('game-messages', message);
+    event.preventDefault()
+    utils.clearMessages()
+    socket.emit('attack', userInfo)
 })
 
 socket.emit('join-lobby', userInfo)
@@ -70,6 +72,7 @@ socket.on('notification', notification => {
 
 socket.on('message', message => {
     utils.appendGameMessage(message) 
+    // utils.clearMessages()
 })
 
 // socket.on('start-battle', )

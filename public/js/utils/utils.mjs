@@ -31,6 +31,15 @@ export const fadeAndRemoveMessage = () => {
     }, 5000);
 }
 
+export const clearMessages = () => {
+    const battleMessage = document.querySelectorAll('.battle-message')
+    
+    battleMessage.forEach(message =>{
+        message.remove()
+    })
+}
+
+
 export const userList = (users, currentUser) => {
 	const userList = document.getElementById('trainer-container')
     const startButton = document.querySelector('.start-button')
