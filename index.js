@@ -1,4 +1,5 @@
 require("dotenv").config()
+require("@babel/polyfill");
 
 const socket = require('./modules/socket')
 

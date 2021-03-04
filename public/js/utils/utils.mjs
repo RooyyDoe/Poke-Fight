@@ -41,7 +41,7 @@ export const clearMessages = () => {
 
 
 export const userList = (users, currentUser) => {
-	const userList = document.getElementById('trainer-container')
+	const userList = document.getElementById('trainer-list')
     const startButton = document.querySelector('.start-button')
 
 	removeUserList(userList)
@@ -70,9 +70,9 @@ export const userList = (users, currentUser) => {
     } else {
         startButton.disabled = true
     }
-
 }
 
 const removeUserList = (list) => {
 	list.innerHTML = ""
 }
+

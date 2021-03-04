@@ -32,11 +32,11 @@
                         <form action="/lobby" method="POST">
                             <div class="gamer-tag">
                                 <label for="username">Enter your gamer tag</label><br>
-                                <input type="text" id="gamer-tag" name="username">
+                                <input type="text" id="gamer-tag" name="username" required>
                             </div>
                             <div class="pokemon-gyms">
                                 <label for="gym">Select your gym lobby</label><br>
-                                <select name="gym" id="pokemon-gyms">
+                                <select name="gym" id="pokemon-gyms" required>
                                     <option value="pewter-gym">Pewter Gym</option>
                                     <option value="cerulean-gym">Cerulean Gym</option>
                                     <option value="vermilion-gym">Vermilion Gym</option>
@@ -49,9 +49,9 @@
                             </div>
                             <div class="gender-checkboxes">
                                 <p>Select your gender</p>
-                                <input type="radio" id="girl" name="gender" value="girl">
+                                <input type="radio" id="girl" name="gender" value="girl" required>
                                 <label for="vehicle1"> Girl</label>
-                                <input type="radio" id="boy" name="gender" value="boy">
+                                <input type="radio" id="boy" name="gender" value="boy" required>
                                 <label for="vehicle2"> Boy</label>
                             </div>
                             <div class="submit-button">
