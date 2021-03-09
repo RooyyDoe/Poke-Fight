@@ -61,8 +61,7 @@ export const userList = (users, currentUser) => {
         p.textContent = user.username
 
         userList.append(list)
-        list.append(img)
-        list.append(p)
+        list.append(img, p)
 	})
 
     if (users.length === 2) {

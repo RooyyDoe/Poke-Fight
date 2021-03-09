@@ -1,5 +1,6 @@
 const express = require('express')
 const userData = require('../modules/users')
+const pokemonData = require('../modules/pokemonData')
 const lobbyRoute = express.Router()
 
 lobbyRoute.use( (req, res) => {

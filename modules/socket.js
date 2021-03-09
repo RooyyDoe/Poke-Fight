@@ -28,6 +28,9 @@ module.exports = (io) => {
             const users = getUsersInGym(client.gym)
             io.to(client.gym).emit('gym-users', users)
 
+            user1 = null
+            user2 = null
+
         })
 
         socket.on('battle', (client) => {
@@ -47,6 +50,11 @@ module.exports = (io) => {
                 console.log('pokemon1 health', pokemon1.health)
                 socket.emit('message', 'Waiting for an opponent..., you are player 1.')
             }
+
+            if(user1 && user2) {
+                io.to(client.gym).emit('game-starts', )
+            }
+            console.log('this is user 1: ', user1, 'this is user 2: ', user2)
 
         })
 
@@ -115,7 +123,17 @@ module.exports = (io) => {
 
         socket.on('search-results', async pokemonName => {
             const data = await pokemonData(pokemonName)
-            console.log(data)
+            const pokemonInfo = {
+                name: data.name,
+                sprites: {
+                    back: data.sprites.back_default,
+                    front: data.sprites.front_default
+                },
+                health: data.stats[0].base_stat * 10,
+                type: data.types[0].type.name,
+                weight: data.weight
+            }
+            socket.emit('return-search-results', pokemonInfo)
         }) 
 
         socket.on('game-messages', message => {
@@ -132,7 +150,7 @@ module.exports = (io) => {
                 io.to(user.gym).emit('notification', `${user.username} has left the gym`)
 
                 const users = getUsersInGym(user.gym)
-                io.to(user.gym).emit('gymUsers', users)
+                io.to(user.gym).emit('gym-users', users)
             }
 
         })

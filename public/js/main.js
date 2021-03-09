@@ -31,15 +31,15 @@ if (userInfo) {
 
 }
 
-const renderTurnMessage = (playerOneTurn) => {
-    if (playerOneTurn) {
-        document.querySelector(".battle-message").textContent = "Your opponent's turn";
-        document.querySelector(".attack-button").disabled = true
-    } else {
-        document.querySelector(".battle-message").textContent = "Your turn";
-        document.querySelector(".attack-button").removeAttribute("disabled")
-    }
-}
+// const renderTurnMessage = (playerOneTurn) => {
+//     if (playerOneTurn) {
+//         document.querySelector(".battle-message").textContent = "Your opponent's turn";
+//         document.querySelector(".attack-button").disabled = true
+//     } else {
+//         document.querySelector(".battle-message").textContent = "Your turn";
+//         document.querySelector(".attack-button").removeAttribute("disabled")
+//     }
+// }
 
 const attackButton = document.querySelector('.attack-button')
 
@@ -75,7 +75,31 @@ socket.on('message', message => {
     // utils.clearMessages()
 })
 
+socket.on('return-search-results', (pokemonInfo) => {
+    const pokemonName = document.getElementById('pokemon-name')
+    const pokemonImage = document.getElementById('pokemon-image')
+    const pokemonHealth = document.getElementById('health')
+    const pokemonType = document.getElementById('type')
+    const pokemonWeight = document.getElementById('weight')
+    
+    pokemonHealth.innerText = pokemonInfo.health
+    pokemonType.innerText = pokemonInfo.type
+    pokemonWeight.innerText = pokemonInfo.weight
+    pokemonName.innerText = pokemonInfo.name
+    pokemonImage.src = `${pokemonInfo.sprites.front}`
+
+})
+
+socket.on('game-starts', ()=> {
+    document.querySelector(".start-button").disabled = true
+})
+
 socket.on('game-over', () => {
     utils.clearMessages()
     document.querySelector(".attack-button").disabled = true
+
+    // setTimeout(() => {
+    //     window.location.href = '/'
+    // }, 5000);
 })
+
