@@ -15,6 +15,10 @@
             </div>
             <div class="container-leftside-battle">
                 <div class="battle-container">
+                    <div class="your-pokemon">
+                        <label for="health-output">HP:</label>
+                        <progress id="health-output"></progress>
+                    </div>
                 </div>
                 <div class="battle-message-container">
                     <div class="message-output">
@@ -24,10 +28,10 @@
                         </div>
                     </div>
                     <div class="attack-buttons">
-                        <button id="attack1" class="attack-button">Attack1</button>
-                        <button id="attack2" class="attack-button">Attack2</button>
-                        <button id="attack3" class="attack-button">Attack3</button>
-                        <button id="attack4" class="attack-button">Attack4</button>
+                        <button id="attack1" class="attack-button">Attack 1</button>
+                        <button id="attack2" class="attack-button">Attack 2</button>
+                        <button id="attack3" class="attack-button">Attack 3</button>
+                        <button id="attack4" class="attack-button">Attack 4</button>
                     </div>
                 </div>
             </div>
@@ -53,13 +57,14 @@
                 </div>
                 <div class="bottomside-inside-container">
                     <div class="search-container">
-                        <label for="search">What pokemon do you want?</label>
-                        <input id="search" type="search" placeholder="Search..." autofocus required />
-                        <button id="search-button" type="submit">Go</button>
+                        <input id="search" type="search" placeholder="What pokemon do you want?" required />
+                        <button id="search-button" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </div>
                     <div class="pokemon-image-container">
-                        <h2 id="pokemon-name"></h2>
                         <img id="pokemon-image">
+                        <h2 id="pokemon-name"></h2>
                     </div>
                     <div class="pokemon-information-container">
                         <div class="pokemon-health">

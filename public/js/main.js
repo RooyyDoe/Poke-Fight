@@ -7,18 +7,37 @@ const userInfo = {
     username: infoElement.getAttribute('user-name'),
     gym: infoElement.getAttribute('gym-name'),
     gender: infoElement.getAttribute('gender'),
-    pokemon: {
-        name: 'ditto',
-        health: 200,
-        type: 'normal'
-    }
-} 
+}
 
-if (userInfo) {
-
+socket.on('return-search-results', (pokemonInfo) => {
+    const pokemonName = document.getElementById('pokemon-name')
+    const pokemonImage = document.getElementById('pokemon-image')
+    const pokemonHealth = document.getElementById('health')
+    const pokemonType = document.getElementById('type')
+    const pokemonWeight = document.getElementById('weight')
+    const healthBar = document.getElementById('health-output')
     const lobby = document.querySelector('.lobby-container-leftside')
     const battle = document.querySelector('.container-leftside-battle')
     const startButton = document.querySelector('.start-button')
+    
+    pokemonHealth.innerText = pokemonInfo.health
+    pokemonType.innerText = pokemonInfo.type
+    pokemonWeight.innerText = pokemonInfo.weight
+    pokemonName.innerText = pokemonInfo.name
+    pokemonImage.src = pokemonInfo.sprites.display
+    healthBar.value = pokemonInfo.health
+    healthBar.max = pokemonInfo.health
+
+    const newUserData = {
+        username: userInfo.username,
+        gym: userInfo.gym,
+        gender: userInfo.gender,
+        pokemon: {
+            name: pokemonInfo.name,
+            type: pokemonInfo.type,
+            health: pokemonInfo.health,
+        }
+    }
 
     startButton.addEventListener('click', (event) => {
         event.preventDefault();
@@ -26,10 +45,9 @@ if (userInfo) {
         lobby.classList.add('fade-out')
         battle.classList.add('fade-in')
 
-        socket.emit('battle', userInfo)
+        socket.emit('battle', newUserData)
     });
-
-}
+})
 
 // const renderTurnMessage = (playerOneTurn) => {
 //     if (playerOneTurn) {
@@ -75,22 +93,12 @@ socket.on('message', message => {
     // utils.clearMessages()
 })
 
-socket.on('return-search-results', (pokemonInfo) => {
-    const pokemonName = document.getElementById('pokemon-name')
-    const pokemonImage = document.getElementById('pokemon-image')
-    const pokemonHealth = document.getElementById('health')
-    const pokemonType = document.getElementById('type')
-    const pokemonWeight = document.getElementById('weight')
-    
-    pokemonHealth.innerText = pokemonInfo.health
-    pokemonType.innerText = pokemonInfo.type
-    pokemonWeight.innerText = pokemonInfo.weight
-    pokemonName.innerText = pokemonInfo.name
-    pokemonImage.src = `${pokemonInfo.sprites.front}`
 
-})
 
-socket.on('game-starts', ()=> {
+socket.on('game-starts', (health)=> {
+    // const battleContainer = document.querySelector('.battle-container')
+    console.log('test', health)
+
     document.querySelector(".start-button").disabled = true
 })
 

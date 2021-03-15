@@ -8,6 +8,7 @@ module.exports = (io) => {
     let username1 = null
     let username2 = null
 
+
     io.on("connection", (socket) => {
 
         socket.on('join-lobby', (client) => {
@@ -35,6 +36,8 @@ module.exports = (io) => {
 
         socket.on('battle', (client) => {
 
+            console.log(client)
+
             if(user1) {
                 user2 = socket
                 username2 = client.username
@@ -52,9 +55,9 @@ module.exports = (io) => {
             }
 
             if(user1 && user2) {
-                io.to(client.gym).emit('game-starts', )
+                io.to(client.gym).emit('game-starts')
             }
-            console.log('this is user 1: ', user1, 'this is user 2: ', user2)
+            // console.log('this is user 1: ', user1, 'this is user 2: ', user2)
 
         })
 
@@ -126,13 +129,15 @@ module.exports = (io) => {
             const pokemonInfo = {
                 name: data.name,
                 sprites: {
+                    display: data.sprites.other.dream_world.front_default,
                     back: data.sprites.back_default,
                     front: data.sprites.front_default
                 },
-                health: data.stats[0].base_stat * 10,
+                health: data.stats[0].base_stat * 5,
                 type: data.types[0].type.name,
                 weight: data.weight
             }
+
             socket.emit('return-search-results', pokemonInfo)
         }) 
 

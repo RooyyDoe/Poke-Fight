@@ -7,6 +7,16 @@
 * 12/29/2014
 */
 
+@font-face {
+  font-family: "Pokemon GB";
+  src: url("Pokemon_GB.eot?") format("eot"),
+    url("Pokemon_GB.woff") format("woff"),
+    url("Pokemon_GB.ttf") format("truetype"),
+    url("Pokemon_GB.svg#PokemonGB") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Table of contents
 ––––––––––––––––––––––––––––––––––––––––––––––––––
 - Grid
@@ -122,6 +132,7 @@
 }
 
 .battle-container {
+  position: relative;
   background-image: url("/images/pokemon-battle-ground.jpeg");
   background-repeat: no-repeat, repeat;
   background-size: cover;
@@ -129,11 +140,28 @@
   padding: 20px;
 }
 
+.your-pokemon {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  width: 30%;
+  height: 15%;
+  padding: 10px;
+  background-color: rgb(248, 247, 215);
+  border: 5px solid rgb(50, 69, 36);
+  border-radius: 20px 5px 20px 5px;
+}
+
 .battle-message-container {
   display: flex;
   padding: 15px 10px 10px 10px;
   height: 25%;
   background-color: rgba(0, 0, 0);
+}
+
+.battle-message {
+  font-family: "Pokemon GB", sans-serif;
+  padding: 50px;
 }
 
 .message-output {
@@ -213,6 +241,70 @@
   border-right: 20px solid rgb(219, 8, 41);
   border-radius: 5px;
   margin: -5px 5px 15px 5px;
+}
+
+.pokemon-image-container {
+  margin: 1em;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+#search {
+  width: 100%;
+  border: 3px solid rgb(219, 8, 41);
+  border-right: none;
+  padding: 15px;
+  height: 20px;
+  outline: none;
+  border-radius: 5px 0 0 5px;
+  color: rgb(219, 8, 41);
+}
+
+#search-button {
+  width: 40px;
+  height: 36px;
+  border: 1px solid rgb(219, 8, 41);
+  background: rgb(219, 8, 41);
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  outline: none;
+  font-size: 20px;
+}
+
+.pokemon-image-container > img {
+  width: auto;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.pokemon-information-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap-reverse;
+  text-align: center;
+  margin-right: 1em;
+  margin-top: 30px;
+}
+
+.pokemon-information-container p:nth-child(1) {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.pokemon-information-container p:nth-child(2) {
+  font-size: 1.2em;
+  font-weight: 300;
 }
 
 /* Base Styles
@@ -397,9 +489,7 @@ a:hover {
 }
 
 .attack-button {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-size: 2rem;
+  font-family: "Pokemon GB", sans-serif;
   padding: 0px 10px;
   width: 45%;
   transition: 1s;

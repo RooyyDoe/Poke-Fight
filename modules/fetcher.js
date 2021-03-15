@@ -1,10 +1,14 @@
 const fetch = require('node-fetch')
 
-const checkStatus = (response) => {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;    
+const handleResponse = (response) => {
+    if (response.ok) {
+        return response;
+    } 
+    else {
+        const error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+    }   
 }
 
 const parseJSON = res => res.json()
@@ -12,7 +16,7 @@ const parseJSON = res => res.json()
 const fetcher = {
     get: (path) =>
         fetch(path)
-        .then(checkStatus)
+        .then(handleResponse)
         .then(parseJSON)
 }
 
