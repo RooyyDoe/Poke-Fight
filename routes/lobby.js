@@ -1,6 +1,5 @@
 const express = require('express')
 const userData = require('../modules/users')
-const pokemonData = require('../modules/pokemonData')
 const lobbyRoute = express.Router()
 
 lobbyRoute.use( (req, res) => {
@@ -9,6 +8,8 @@ lobbyRoute.use( (req, res) => {
     const gender = req.body.gender
 
     const users = userData.getUsersInGym(gym)
+
+    console.log(users.id)
 
     const user_info = {
         username: user,

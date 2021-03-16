@@ -10,12 +10,13 @@ const userInfo = {
 }
 
 socket.on('return-search-results', (pokemonInfo) => {
+
     const pokemonName = document.getElementById('pokemon-name')
     const pokemonImage = document.getElementById('pokemon-image')
     const pokemonHealth = document.getElementById('health')
     const pokemonType = document.getElementById('type')
     const pokemonWeight = document.getElementById('weight')
-    const healthBar = document.getElementById('health-output')
+    // const healthBar = document.getElementById('health-output-you')
     const lobby = document.querySelector('.lobby-container-leftside')
     const battle = document.querySelector('.container-leftside-battle')
     const startButton = document.querySelector('.start-button')
@@ -25,8 +26,8 @@ socket.on('return-search-results', (pokemonInfo) => {
     pokemonWeight.innerText = pokemonInfo.weight
     pokemonName.innerText = pokemonInfo.name
     pokemonImage.src = pokemonInfo.sprites.display
-    healthBar.value = pokemonInfo.health
-    healthBar.max = pokemonInfo.health
+    // healthBar.value = pokemonInfo.health
+    // healthBar.max = pokemonInfo.health
 
     const newUserData = {
         username: userInfo.username,
@@ -35,7 +36,12 @@ socket.on('return-search-results', (pokemonInfo) => {
         pokemon: {
             name: pokemonInfo.name,
             type: pokemonInfo.type,
+            sprites: {
+                front: pokemonInfo.sprites.front,
+                back: pokemonInfo.sprites.back,
+            },
             health: pokemonInfo.health,
+            in_health: pokemonInfo.health
         }
     }
 
@@ -93,13 +99,48 @@ socket.on('message', message => {
     // utils.clearMessages()
 })
 
+socket.on('game-starts', (player1, pokemon1, pokemon2) => {
 
+    console.log(player1)
+    console.log(userInfo.username)
 
-socket.on('game-starts', (health)=> {
-    // const battleContainer = document.querySelector('.battle-container')
-    console.log('test', health)
+    const healthBarP1 = document.getElementById('health-output-p1')
+    const healthBarP2 = document.getElementById('health-output-p2')
+    const pokemonNameP1 = document.getElementById('opponents-pokemon-name')
+    const pokemonNameP2 = document.getElementById('your-pokemon-name')
+    const yourPokemon = document.getElementById('your-pokemon-image')
+    const opponentsPokemon = document.getElementById('opponents-pokemon-image')
 
+    if(player1 === userInfo.username) {
+        pokemonNameP1.innerText = pokemon2.name
+        pokemonNameP2.innerText = pokemon1.name
+        healthBarP1.value = pokemon1.health
+        healthBarP2.value = pokemon2.health
+        healthBarP1.max = pokemon1.in_health
+        healthBarP2.max = pokemon2.in_health
+        yourPokemon.src = pokemon1.sprites.back
+        opponentsPokemon.src = pokemon2.sprites.front
+    } else {
+        pokemonNameP1.innerText = pokemon1.name
+        pokemonNameP2.innerText = pokemon2.name
+        healthBarP1.value = pokemon2.health
+        healthBarP2.value = pokemon1.health
+        healthBarP1.max = pokemon2.in_health
+        healthBarP2.max = pokemon1.in_health
+        yourPokemon.src = pokemon2.sprites.back
+        opponentsPokemon.src = pokemon1.sprites.front
+    }
+    
     document.querySelector(".start-button").disabled = true
+})
+
+socket.on('health-checker', (pokemon1, pokemon2) => {
+
+    const healthBarP1 = document.getElementById('health-output-p1')
+    const healthBarP2 = document.getElementById('health-output-p2')
+
+    healthBarP1.value = pokemon1.health
+    healthBarP2.value = pokemon2.health  
 })
 
 socket.on('game-over', () => {

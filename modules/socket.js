@@ -36,26 +36,30 @@ module.exports = (io) => {
 
         socket.on('battle', (client) => {
 
-            console.log(client)
-
             if(user1) {
                 user2 = socket
+                id2 = socket.id
+                console.log('user2', id2)
                 username2 = client.username
                 pokemon2 = client.pokemon
                 user1.emit('message', `The battle starts now! ${username1} starts.`)
-                user2.emit('message',  `The battle starts now! ${username1} starts.`)
+                user2.emit('message', `The battle starts now! ${username1} starts.`)
                 // [user1, user2].forEach(s => s.emit('message', `The battle starts now! ${username1} starts.`))
                 console.log('pokemon2 health', pokemon2.health)
             } else {
                 user1 = socket
+                id1 = socket.id
+                console.log('user1', id1)
                 username1 = client.username
                 pokemon1 = client.pokemon
                 console.log('pokemon1 health', pokemon1.health)
                 socket.emit('message', 'Waiting for an opponent..., you are player 1.')
             }
 
+            console.log(client)
+
             if(user1 && user2) {
-                io.to(client.gym).emit('game-starts')
+                io.to(client.gym).emit('game-starts', username1, pokemon1, pokemon2)
             }
             // console.log('this is user 1: ', user1, 'this is user 2: ', user2)
 
@@ -82,6 +86,7 @@ module.exports = (io) => {
                 user2.emit('message', message2)
                 user1.emit('message', message3)
                 user2.emit('message', message3)
+                io.to(userInfo.gym).emit('health-checker', pokemon1, pokemon2)
 
                 if(pokemon2.health <= 0){
                     io.to(userInfo.gym).emit('game-over')
@@ -98,6 +103,7 @@ module.exports = (io) => {
                 user2.emit('message', message2)
                 user1.emit('message', message3)
                 user2.emit('message', message3)
+                io.to(userInfo.gym).emit('health-checker', pokemon1, pokemon2)
 
                 if(pokemon1.health <= 0){
                     io.to(userInfo.gym).emit('game-over')

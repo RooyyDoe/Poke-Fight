@@ -1,7 +1,7 @@
 <body id="lobby">
 
-    <input type="hidden" id="user-info" user-name="{{ user_info.username }}" gym-name="{{ user_info.gymName }}"
-        gender="{{ user_info.gender }}">
+    <input type="hidden" id="user-info" user-id="{{users.id}}" user-name="{{ user_info.username }}"
+        gym-name="{{ user_info.gymName }}" gender="{{ user_info.gender }}">
 
     <main>
         <div class="lobby-container">
@@ -15,9 +15,25 @@
             </div>
             <div class="container-leftside-battle">
                 <div class="battle-container">
-                    <div class="your-pokemon">
-                        <label for="health-output">HP:</label>
-                        <progress id="health-output"></progress>
+                    <div class="opponent">
+                        <div class="opponents-pokemon-information">
+                            <p id="opponents-pokemon-name"></p>
+                            <label for="health-output">HP:</label>
+                            <progress id="health-output-p2"></progress>
+                        </div>
+                        <div class="opponents-pokemon">
+                            <img id="opponents-pokemon-image">
+                        </div>
+                    </div>
+                    <div class="you">
+                        <div class="your-pokemon">
+                            <img id="your-pokemon-image">
+                        </div>
+                        <div class="your-pokemon-information">
+                            <p id="your-pokemon-name"></p>
+                            <label for="health-output">HP:</label>
+                            <progress id="health-output-p1"></progress>
+                        </div>
                     </div>
                 </div>
                 <div class="battle-message-container">
