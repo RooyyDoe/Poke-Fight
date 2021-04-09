@@ -1,23 +1,35 @@
 # Poké fight
 
-In this application users will be able to battle it out in a real-time pokemon battle.
+In deze applicatie kunnen pokemon-trainers het tegen elkaar opnemen en een gevechten starten in een realtime Pokemon arena.
 
-**Image loading...**
+## Het concept
+
+In deze applicatie kunnen de gebruikers een Pokemon battle met elkaar beginnen. Wanneer een gebruiker in de lobby komt moet er een Pokemon uitgekozen worden die aan hun zijde gaat vechten. Wanneer een pokemon aanvalt zal de damage worden gebaseerd op de typering van de pokemons _(zie Damage-chart)_ . De pokemon battle gaat door totdat een van de pokemons niet meer kan vechten, wat zal gebeuren wanneer de `health bar` nul bereikt. Na een gevecht krijgt de winnende gebruiker een `victory` scherm en worden beide spelers terug gestuurd naar het begin scherm.
+
+Als de gebruiker zich aanmeldt om een pokemon trainer te worden, word die doorverwezen naar de geselecteerde lobby. Wanneer er twee gebruikers in de lobby zijn en ze aan de voorwaardes voldoen is het mogelijk om een battle te starten.
+
+<details>
+  <summary>Damage-chart</summary>
+  
+  Hierbij ga ik voornamelijk gebruik maken van de eerste drie in deze lijst. 
+  
+  - **2** super-effective	Super Effective
+  - **1** normal-damage	Normal
+  - **0.5** not-very-effective	Not Very Effective
+  - **0** _no-effect	No Effect_
+  
+  ![Pokemon-Lets-Go-Type-Chart](https://user-images.githubusercontent.com/40355914/114159726-5fccdb00-9926-11eb-9617-ad45ef56bdfa.jpeg)
+
+
+</details>
+
+<img width="1552" alt="Schermafbeelding 2021-04-09 om 11 03 58" src="https://user-images.githubusercontent.com/40355914/114157065-863d4700-9923-11eb-9c94-cd02f79d2fbe.png">
 
 - [application concept](#application-concept)
 
-## Application concept
+## Features
 
-In this application the users are able to start a pokemon battle with each other. A pokemon trainer has to pick a pokemon that is going to fight along their side. The pokemons that are selected will each come with different moves to fight with. These pokemons all have four moves that you can use to attack your opponents with in these battles. The fight will go on till one of the pokemon has fainted, which will happen when the health bar reaches zero. After a battle the winning pokemon trainer gets the gold.
-
-If you sign up to be a pokemon trainer you will directed to the main pokemon lobby. In the pokemon lobby you will be able to select a battle room to fight another pokemon trainer in.
-
-## Extra features..
-
-- Pokemon trainers will be able to level up their pokemon from 0 to 99. (This will happen by clicking, fighting pokemon battles or in-game items)
-- Pokemon trainers will be able to battle 2 v 2 where they can invite their friends into a real pokemon battle.
-- Wild pokemons will randomly appear on the screen of the pokemon trainer and they will be able to battle and catch the wild pokemon.
-- Pokemon trainers can select a view skins for their character to wear into battles.
+- [] 
 
 ## Install
 
@@ -52,6 +64,15 @@ Server running on **localhost:5000**
 ## Data life cycle
 
 **Coming coon...**
+
+## Socket server events
+
+## Socket client listeners
+
+## API
+
+## Conclusie
+
 
 ## Sources
 
