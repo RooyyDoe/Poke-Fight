@@ -3,7 +3,6 @@ const userData = require('../modules/users')
 const lobbyRoute = express.Router()
 
 lobbyRoute.use( (req, res) => {
-    console
 
     const user = req.body.username
     const gym = req.body.gym

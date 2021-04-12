@@ -1,5 +1,5 @@
 const { joinGymLobby, getCurrentUser, getUsersInGym, userLeave} = require('./users')
-const { pokemonData } = require('./pokemonData')
+const { pokemonData, pokemonTypeData } = require('./pokemonData')
 
 module.exports = (io) => { 
 
@@ -51,8 +51,35 @@ module.exports = (io) => {
 
             // Processing the search request and obtaining the pokemon data of the requested pokemon
             const data = await pokemonData(pokemonName)
+            const type = data.types[0].type.name
+            const typeData = await pokemonTypeData(type)
+
+            // console.log('typeData', typeData)
+            
+            //const dataType = await pokemonTypeData()
+
             const pokemonInfo = {
                 name: data.name,
+                damage_relations: {
+                    double_damage_from: typeData.damage_relations.double_damage_from.map(type => {
+                        return type.name
+                    }),
+                    double_damage_to: typeData.damage_relations.double_damage_to.map(type => {
+                        return type.name
+                    }),
+                    half_damage_from: typeData.damage_relations.half_damage_from.map(type => {
+                        return type.name
+                    }),
+                    half_damage_to: typeData.damage_relations.half_damage_to.map(type => {
+                        return type.name
+                    }),
+                    no_damage_from: typeData.damage_relations.no_damage_from.map(type => {
+                        return type.name
+                    }),
+                    no_damage_to: typeData.damage_relations.no_damage_to.map(type => {
+                        return type.name
+                    })
+                },
                 sprites: {
                     display: data.sprites.other.dream_world.front_default,
                     back: data.sprites.back_default,
@@ -62,6 +89,9 @@ module.exports = (io) => {
                 type: data.types[0].type.name,
                 weight: data.weight
             }
+
+            console.log('typeData', pokemonInfo)
+
 
             socket.emit('return-search-results', pokemonInfo)
         }) 
