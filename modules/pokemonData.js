@@ -6,4 +6,13 @@ const pokemonData = async (query) => {
     return pokemonList
 }
 
-module.exports = pokemonData
+const pokemonTypeData = async (type) => {
+    const typeResources = await fetcher.get(`https://pokeapi.co/api/v2/type/${type}`)
+    console.log(typeResources)
+    return typeResources
+}
+
+module.exports = {
+    pokemonData,
+    pokemonTypeData,
+}
