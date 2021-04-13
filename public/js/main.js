@@ -2,6 +2,9 @@ import * as utils from './utils/utils.mjs'
 
 const socket = io()
 
+const search_bar = document.getElementById('search')
+const search_button = document.getElementById('search-button')
+const attackButton = document.querySelector('.attack-button')
 const infoElement = document.getElementById('user-info')
 const userInfo = {
     username: infoElement.getAttribute('user-name'),
@@ -9,15 +12,15 @@ const userInfo = {
     gender: infoElement.getAttribute('gender'),
 }
 
+// send the just joined user-info to server-side
 socket.emit('join-lobby', userInfo)
 
-const search_bar = document.getElementById('search')
-const search_button = document.getElementById('search-button')
-
+// sends the search value to the server-side
 search_button.addEventListener("click", () => {
     socket.emit('search-results', search_bar.value)
 })
 
+// gets pokemon data from server-side fetch call
 socket.on('return-search-results', (pokemonInfo) => {
 
     const pokemonName = document.getElementById('pokemon-name')
@@ -25,7 +28,6 @@ socket.on('return-search-results', (pokemonInfo) => {
     const pokemonHealth = document.getElementById('health')
     const pokemonType = document.getElementById('type')
     const pokemonWeight = document.getElementById('weight')
-    // const healthBar = document.getElementById('health-output-you')
     const lobby = document.querySelector('.lobby-container-leftside')
     const battle = document.querySelector('.container-leftside-battle')
     const startButton = document.querySelector('.start-button')
@@ -35,9 +37,8 @@ socket.on('return-search-results', (pokemonInfo) => {
     pokemonWeight.innerText = pokemonInfo.weight
     pokemonName.innerText = pokemonInfo.name
     pokemonImage.src = pokemonInfo.sprites.display
-    // healthBar.value = pokemonInfo.health
-    // healthBar.max = pokemonInfo.health
 
+    // new object where I link the player and the pokemon together.
     const newUserData = {
         username: userInfo.username,
         gym: userInfo.gym,
@@ -48,40 +49,40 @@ socket.on('return-search-results', (pokemonInfo) => {
     startButton.addEventListener('click', (event) => {
         event.preventDefault();
 
+        // switches scene's to battle arena
         lobby.classList.add('fade-out')
         battle.classList.add('fade-in')
 
-        socket.emit('battle', newUserData)
+        // Sends the linked player/pokemon data to the server
+        socket.emit('join-battle', newUserData)
     });
 })
 
-const attackButton = document.querySelector('.attack-button')
-
+// fires the on-attack socket from server side when player clicks on the attack button
 attackButton.addEventListener('click', (event) => {
     event.preventDefault()
     utils.clearMessages()
-    socket.emit('attack', userInfo)
+    socket.emit('on-attack', userInfo)
 })
 
 
-// get gym and users
-
+// get gym and users to make a user-list for each gym.
 socket.on('gym-users', users => utils.userList(users, userInfo.username))
 
+// Notification message to show if someone joined or left the lobby
 socket.on('notification', notification => {
     utils.appendLobbyMessage(notification)  
-    // utils.fadeAndRemoveMessage()
+    // utils.fadeAndRemoveMessage() <-- don't remove (turn on when end of project)
 })
 
+// In this socket all the message that I need to show will be handled
 socket.on('message', message => {
-    // if(message) {
-    //     document.querySelector(".battle-message").textContent = message;
-    // }
     utils.clearMessages()
     utils.appendGameMessage(message)  
 })
 
-socket.on('game-starts', (player1, pokemon1, pokemon2) => {
+// Here the game starts and all the battle elements will be generated 
+socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
 
     const healthBarP1 = document.getElementById('health-output-p1')
     const healthBarP2 = document.getElementById('health-output-p2')
@@ -117,11 +118,12 @@ socket.on('game-starts', (player1, pokemon1, pokemon2) => {
         document.querySelector(".attack-button").disabled = true
     }
     
+    // When 2 players joined the battle, the start button will be disabled. 
     document.querySelector(".start-button").disabled = true
 })
 
+// Checks the health of the pokemons
 socket.on('health-checker', (player1, pokemon1, pokemon2) => {
-    console.log(player1)
 
     const healthBarP1 = document.getElementById('health-output-p1')
     const healthBarP2 = document.getElementById('health-output-p2')
@@ -141,8 +143,8 @@ socket.on('health-checker', (player1, pokemon1, pokemon2) => {
     }
 })
 
+// checks which players turn it is.
 socket.on('turn-checker', (player1, turn_player1) => {
-    // Hier komt de turn system
 
     if(player1 === userInfo.username) {
         if(turn_player1) {
@@ -159,12 +161,13 @@ socket.on('turn-checker', (player1, turn_player1) => {
     }
 })
 
+// game over state
 socket.on('game-over', () => {
     utils.clearMessages()
     document.querySelector(".attack-button").disabled = true
 
-    // setTimeout(() => {
-    //     window.location.href = '/'
-    // }, 5000);
+    setTimeout(() => {
+        window.location.href = '/'
+    }, 5000);
 })
 

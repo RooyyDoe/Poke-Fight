@@ -29,35 +29,19 @@ module.exports = (io) => {
             const users = getUsersInGym(client.gym)
             io.to(client.gym).emit('gym-users', users)
 
-            //user1 = null
-            //user2 = null
-
         })
 
-        socket.on('disconnect', () => {
-            // Runs when client disconnects
-            const user = userLeave(socket.id)
-
-            if (user) {
-                io.to(user.gym).emit('notification', `${user.username} has left the gym`)
-
-                const users = getUsersInGym(user.gym)
-                io.to(user.gym).emit('gym-users', users)
-            }
-
-        })
-
-        socket.on('search-results', async pokemonName => {
+        socket.on('search-results', async input => {
 
             // Processing the search request and obtaining the pokemon data of the requested pokemon
-            const data = await pokemonData(pokemonName)
+            const data = await pokemonData(input)
+
             const type = data.types[0].type.name
+
+            // Taking the type from the pokemon search and get extra information for the damage relations.
             const typeData = await pokemonTypeData(type)
 
-            // console.log('typeData', typeData)
-            
-            //const dataType = await pokemonTypeData()
-
+            // New object that will have the pokemon data that we need for the battle
             const pokemonInfo = {
                 name: data.name,
                 damage_relations: {
@@ -90,60 +74,40 @@ module.exports = (io) => {
                 type: data.types[0].type.name,
                 weight: data.weight
             }
-
-            // console.log('typeData', pokemonInfo)
-
-
             socket.emit('return-search-results', pokemonInfo)
         }) 
 
         socket.on('game-messages', message => {
+            
             // Display game message
             const user = getCurrentUser(socket.id); 
 
             io.to(user.gym).emit('message', message);
         })
 
-        socket.on('battle', (client) => {
+        socket.on('join-battle', (client) => {
             
             if(user1_present) {
                 user2 = socket
                 user1_present = false //Reset value for next game
-                id2 = socket.id
-                console.log('user2', id2)
                 username2 = client.username
                 pokemon2 = client.pokemon
-                user2.emit('message', `The battle starts now! ${username1} starts.`)
-                user1.emit('message', `The battle starts now! ${username1} starts.`)
-                // [user1, user2].forEach(s => s.emit('message', `The battle starts now! ${username1} starts.`))
-                io.to(client.gym).emit('game-starts', username1, pokemon1, pokemon2)
+                io.to(user2.id).to(user1.id).emit('message', `The battle starts now! ${username1} starts.`)
+                io.to(client.gym).emit('battle-starts', username1, pokemon1, pokemon2)
             } else {
                 user1 = socket
-                user1_present = true
-                id1 = socket.id
-                console.log('user1', id1)
+                user1_present = true 
                 username1 = client.username
                 pokemon1 = client.pokemon
-                console.log('pokemon1 health', pokemon1.health)
                 user1.emit('message', 'Waiting for an opponent..., you are player 1.')
             }
-
-            // if(user1 && user2) {
-            //     io.to(client.gym).emit('game-starts', username1, pokemon1, pokemon2)
-            // }
-            // console.log('this is user 1: ', user1, 'this is user 2: ', user2)
-
         })
 
-        socket.on('attack', (userInfo) => {
+        socket.on('on-attack', (userInfo) => {
 
             let attack = Math.round((Math.random() * 0.4 + 0.6) * 100)
 
-            //let message1 = `Current health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`
-            //io.to(userInfo.gym).emit(message1)
-
             if (turn_player1){
-                //let message2 = `${username1}'s ${pokemon1.name} attacked for ${attack} damage`
                 console.log('userInfo', pokemon2)
                 if (pokemon1.damage_relations.double_damage_to.includes(pokemon2.type)){
                     attack = attack * 2
@@ -155,19 +119,13 @@ module.exports = (io) => {
                     attack = 0
                     console.log('0 damage')
                 }
-                
                 pokemon2.health = pokemon2.health - attack
     
-                let message3 = `New health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`
-                //user1.emit('message', message2)
-                //user2.emit('message', message2)
-                user1.emit('message', message3)
-                user2.emit('message', message3)
+                io.to(user1.id).to(user2.id).emit('message', `New health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`)
                 if(pokemon2.health <= 0){
                     pokemon2.health = 0
                     io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2)
                     io.to(userInfo.gym).emit('game-over')
-                    console.log(`${username1} won the battle, better luck next time!`)
                     user1.emit('message', `You have won the battle, congrats and goodluck on the next one`)
                     user2.emit('message', `${username1} won the battle, better luck next time!`)
                 } else {
@@ -177,7 +135,6 @@ module.exports = (io) => {
                 }
 
             } else {
-                //let message2 = `${username2}'s ${pokemon2.name} attacked for ${attack} damage`
                 if (pokemon2.damage_relations.double_damage_to.includes(pokemon1.type)){
                     attack = attack * 2
                     console.log('Veel damage')
@@ -190,16 +147,11 @@ module.exports = (io) => {
                 }
                 pokemon1.health = pokemon1.health - attack
             
-                let message3 = `New health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`
-                //user1.emit('message', message2)
-                //user2.emit('message', message2)
-                user1.emit('message', message3)
-                user2.emit('message', message3)
+                io.to(user1.id).to(user2.id).emit('message', `New health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`)
                 if(pokemon1.health <= 0){
                     pokemon1.health = 0
                     io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2)
                     io.to(userInfo.gym).emit('game-over')
-                    console.log(`${username2} won the battle, better luck next time!`)
                     user1.emit('message', `${username2} won the battle, better luck next time!`)
                     user2.emit('message', `You have won the battle, congrats and goodluck on the next one`)
                 } else {
@@ -208,25 +160,18 @@ module.exports = (io) => {
                 io.to(userInfo.gym).emit('turn-checker', username1, turn_player1)
                 }
             }
-        
-            
-    
-            // if(user1) {
-            //     let message = `${userInfo.username}'s ${userInfo.pokemon.name} attacked for 100 damage`
-            //     user2 = socket
-            //     username2 = client.username
-            //     user1.emit('message', `The battle starts now! ${username1} starts.`)
-            //     user2.emit('message',  `The battle starts now! ${username1} starts.`)
-            //     console.log('username2', username2)
-            // } else {
-            //     user1 = socket
-            //     username1 = client.username
-            //     console.log('username1', username1)
-            //     socket.emit('message', 'Waiting for an opponent..., you are player 1.')
-            // }
+        })
 
+        socket.on('leave-lobby', () => {
+            // Runs when client disconnects
+            const user = userLeave(socket.id)
+
+            if (user) {
+                io.to(user.gym).emit('notification', `${user.username} has left the gym`)
+
+                const users = getUsersInGym(user.gym)
+                io.to(user.gym).emit('gym-users', users)
+            }
         })
     });
-
-
 }
