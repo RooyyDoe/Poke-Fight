@@ -139,7 +139,7 @@ module.exports = (io) => {
                     attack = attack * 2
                     console.log('Veel damage')
                 } else if (pokemon2.damage_relations.half_damage_to.includes(pokemon1.type)){
-                    attack = round(attack * 0.5)
+                    attack = Math.round(attack * 0.5)
                     console.log('Halve damage')
                 } else if (pokemon2.damage_relations.no_damage_to.includes(pokemon1.type)){
                     attack = 0
@@ -162,7 +162,7 @@ module.exports = (io) => {
             }
         })
 
-        socket.on('leave-lobby', () => {
+        socket.on('disconnect', () => {
             // Runs when client disconnects
             const user = userLeave(socket.id)
 

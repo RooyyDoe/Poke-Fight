@@ -58,13 +58,6 @@ socket.on('return-search-results', (pokemonInfo) => {
     });
 })
 
-// fires the on-attack socket from server side when player clicks on the attack button
-attackButton.addEventListener('click', (event) => {
-    event.preventDefault()
-    utils.clearMessages()
-    socket.emit('on-attack', userInfo)
-})
-
 
 // get gym and users to make a user-list for each gym.
 socket.on('gym-users', users => utils.userList(users, userInfo.username))
@@ -122,6 +115,13 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
     document.querySelector(".start-button").disabled = true
 })
 
+// fires the on-attack socket from server side when player clicks on the attack button
+attackButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    utils.clearMessages()
+    socket.emit('on-attack', userInfo)
+})
+
 // Checks the health of the pokemons
 socket.on('health-checker', (player1, pokemon1, pokemon2) => {
 
@@ -134,12 +134,12 @@ socket.on('health-checker', (player1, pokemon1, pokemon2) => {
         healthBarP1.value = pokemon1.health
         healthBarP2.value = pokemon2.health  
         currentHealthP1.textContent = pokemon1.health + ' / ' + pokemon1.in_health
-        currentHealthP2.textContent = pokemon2.health + ' / ' + pokemon2.in_health
+        // currentHealthP2.textContent = pokemon2.health + ' / ' + pokemon2.in_health
     } else {
         healthBarP1.value = pokemon2.health
         healthBarP2.value = pokemon1.health  
         currentHealthP1.textContent = pokemon2.health + ' / ' + pokemon2.in_health
-        currentHealthP2.textContent = pokemon1.health + ' / ' + pokemon1.in_health
+        // currentHealthP2.textContent = pokemon1.health + ' / ' + pokemon1.in_health
     }
 })
 
@@ -166,8 +166,8 @@ socket.on('game-over', () => {
     utils.clearMessages()
     document.querySelector(".attack-button").disabled = true
 
-    setTimeout(() => {
-        window.location.href = '/'
-    }, 5000);
+    // setTimeout(() => {
+    //     window.location.href = '/'
+    // }, 5000);
 })
 
