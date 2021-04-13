@@ -86,11 +86,12 @@ module.exports = (io) => {
                     front: data.sprites.front_default
                 },
                 health: data.stats[0].base_stat * 5,
+                in_health: data.stats[0].base_stat * 5,
                 type: data.types[0].type.name,
                 weight: data.weight
             }
 
-            console.log('typeData', pokemonInfo)
+            // console.log('typeData', pokemonInfo)
 
 
             socket.emit('return-search-results', pokemonInfo)
@@ -115,7 +116,6 @@ module.exports = (io) => {
                 user2.emit('message', `The battle starts now! ${username1} starts.`)
                 user1.emit('message', `The battle starts now! ${username1} starts.`)
                 // [user1, user2].forEach(s => s.emit('message', `The battle starts now! ${username1} starts.`))
-                console.log('pokemon2 health', pokemon2.health)
                 io.to(client.gym).emit('game-starts', username1, pokemon1, pokemon2)
             } else {
                 user1 = socket
@@ -128,8 +128,6 @@ module.exports = (io) => {
                 user1.emit('message', 'Waiting for an opponent..., you are player 1.')
             }
 
-            console.log(client)
-
             // if(user1 && user2) {
             //     io.to(client.gym).emit('game-starts', username1, pokemon1, pokemon2)
             // }
@@ -139,13 +137,25 @@ module.exports = (io) => {
 
         socket.on('attack', (userInfo) => {
 
-            const attack = Math.round((Math.random() * 0.4 + 0.6) * 100)
+            let attack = Math.round((Math.random() * 0.4 + 0.6) * 100)
 
             //let message1 = `Current health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`
             //io.to(userInfo.gym).emit(message1)
 
             if (turn_player1){
                 //let message2 = `${username1}'s ${pokemon1.name} attacked for ${attack} damage`
+                console.log('userInfo', pokemon2)
+                if (pokemon1.damage_relations.double_damage_to.includes(pokemon2.type)){
+                    attack = attack * 2
+                    console.log('veel')
+                } else if (pokemon1.damage_relations.half_damage_to.includes(pokemon2.type)){
+                    attack = Math.round(attack * 0.5)
+                    console.log('halve damage')
+                } else if (pokemon1.damage_relations.no_damage_to.includes(pokemon2.type)){
+                    attack = 0
+                    console.log('0 damage')
+                }
+                
                 pokemon2.health = pokemon2.health - attack
     
                 let message3 = `New health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`
@@ -168,6 +178,16 @@ module.exports = (io) => {
 
             } else {
                 //let message2 = `${username2}'s ${pokemon2.name} attacked for ${attack} damage`
+                if (pokemon2.damage_relations.double_damage_to.includes(pokemon1.type)){
+                    attack = attack * 2
+                    console.log('Veel damage')
+                } else if (pokemon2.damage_relations.half_damage_to.includes(pokemon1.type)){
+                    attack = round(attack * 0.5)
+                    console.log('Halve damage')
+                } else if (pokemon2.damage_relations.no_damage_to.includes(pokemon1.type)){
+                    attack = 0
+                    console.log('0 damage')
+                }
                 pokemon1.health = pokemon1.health - attack
             
                 let message3 = `New health pokemon1 ${pokemon1.health}, pokemon2 ${pokemon2.health}`

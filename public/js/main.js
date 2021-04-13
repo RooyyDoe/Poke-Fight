@@ -42,16 +42,7 @@ socket.on('return-search-results', (pokemonInfo) => {
         username: userInfo.username,
         gym: userInfo.gym,
         gender: userInfo.gender,
-        pokemon: {
-            name: pokemonInfo.name,
-            type: pokemonInfo.type,
-            sprites: {
-                front: pokemonInfo.sprites.front,
-                back: pokemonInfo.sprites.back,
-            },
-            health: pokemonInfo.health,
-            in_health: pokemonInfo.health
-        }
+        pokemon: pokemonInfo
     }
 
     startButton.addEventListener('click', (event) => {
@@ -91,9 +82,6 @@ socket.on('message', message => {
 })
 
 socket.on('game-starts', (player1, pokemon1, pokemon2) => {
-
-    console.log(player1)
-    console.log(userInfo.username)
 
     const healthBarP1 = document.getElementById('health-output-p1')
     const healthBarP2 = document.getElementById('health-output-p2')
