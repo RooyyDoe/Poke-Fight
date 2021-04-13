@@ -105,7 +105,7 @@ Server running on **localhost:5000**
 
 ## Data life cycle
 
-**Coming coon...**
+![data-life-cycle-diagram-real-time-web](https://user-images.githubusercontent.com/40355914/114565200-566aa800-9c71-11eb-8704-5edd6ce8bfc7.png)
 
 ## Socket server events
 
