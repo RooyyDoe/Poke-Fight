@@ -78,7 +78,7 @@ npm run dev
 
 Server runt dan op: **localhost:5000**
 
-**Demo** kun je ook beijken op: [Poké fight](https://best-poke-fight.herokuapp.com/)
+**Demo** kun je ook bekijken op: [Poké fight](https://best-poke-fight.herokuapp.com/)
 
 ## Ultieme applicatie schetsen
 
@@ -128,6 +128,7 @@ Server runt dan op: **localhost:5000**
 
 ## Socket server events
 
+### on-join server events
 <details> 
   <summary>notification</summary>
   
@@ -142,6 +143,7 @@ Server runt dan op: **localhost:5000**
 
 </details>
 
+### lobby server events
 <details> 
   <summary>return-search-results</summary>
   
@@ -156,6 +158,7 @@ Server runt dan op: **localhost:5000**
 
 </details>
 
+### on-battle server events
 <details> 
   <summary>health-checker</summary>
   
@@ -187,6 +190,7 @@ Server runt dan op: **localhost:5000**
 
 ## Socket client listeners
 
+### on-join client events
 <details> 
   <summary>join-lobby</summary>
   
@@ -194,24 +198,32 @@ Server runt dan op: **localhost:5000**
 
 </details>
 
+### lobby client events
 <details> 
   <summary>search-results</summary>
   
-  
+  De gebruikers kunnen hun Pokemon uitkiezen door deze op te zoeken in de `search-bar` wanneer ze de Pokemon naam hebben geschreven in de `search-bar` en daarna op de knop hebben gedrukt wordt de `input` waarde naar de `server-side` gestuurd.
 
 </details>
 
 <details> 
   <summary>join-battle</summary>
+  
+  Wanneer de gebruikers op de `start-battle` knop drukken begint de battle en veranderd het `lobby` scherm naar het `battle` scherm. Alle data verkregen vanaf de `server-side` wordt in elementen geladen, zodat de gebruikers een bruikbare interface krijgen.
 
 </details>
 
+### on-battle client events
 <details> 
   <summary>on-attack</summary>
+  
+  Elke keer wanneer een gebruiker op de `attack` knop drukt wordt er een event gestuurd naar de `server-side` Hier worden alle functionaliteiten zoals de `health-checker` en `turn-checker` afgehandeld.
 
 </details>
 
 ## API
+
+
 
 ## Conclusie
 
