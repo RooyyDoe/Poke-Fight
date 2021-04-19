@@ -32,23 +32,73 @@ Als de gebruiker zich aanmeldt om een pokemon trainer te worden, word die doorve
 
 ## Features
 
-### **[M]** **Must haves**
+Dit zijn de verschillende features die ik wil gaan toevoegen aan mijn applicatie _(MOSCOW)_
 
-deze eisen moeten in het eindresultaat terugkomen, zonder deze eisen is het product niet bruikbaar
+**[M]** **Must haves**
 
-- [] 
+_deze eisen moeten in het eindresultaat terugkomen, zonder deze eisen is het product niet bruikbaar_
 
-### **[S]** **Should haves**
+- [x] Het kunnen starten van een Pokemon battle wanneer er twee gebruikers aanwezig zijn in een lobby.
+- [x] Het kunnen uitvechten als twee pokemon trainers in een battle waar maar een iemand de winnaar kan zijn.
+  - [x] Het kunnen ophalen van `health` uit de Poké API.
+  - [x] Beurten systeem waar gebruikers elkaar omstebeurt kunnen aanvallen en door middel van deze aanvallen gaat de Pokemon `health` naar beneden _(player one starts)_.
+- [x] Victory/defeat message naar beide spelers.
 
-deze eisen zijn zeer gewenst, maar zonder is het product wel bruikbaar
+**[S]** **Should haves**
 
-- [] 
+_deze eisen zijn zeer gewenst, maar zonder is het product wel bruikbaar_
 
-### **[C]** **Could haves**
+- [x] Het kunnen inloggen als Pokemon-trainer.
+  - [x] _Naam_: Jouw eigen pokemon-trainer naam.
+  - [x] _Gym_: Dit zijn de verschillende lobbies die toegetreden kunnen worden.
+  - [x] _Gender_: De mogelijkheid om een vrouwelijke of mannelijke personage te kiezen.
+- [x] Het kunnen zien van een gebruikers lijst van de huidige lobby.
+- [x] Het kunnen zien van lobby notificaties.
+  - [x] Gebruikers krijgen een welkomst notificatie te zien als ze de lobby toetreden
+  - [x] Gebruikers krijgen een notificatie te zien wanneer er een gebruiker toetreedt of weggaat.
+- [x] Het kunnen zoeken en kiezen van een Pokemon om mee te gaan strijden.
+- [x] Het weergeven van een Pokemon gerelateerde huisstijl.
+- [x] Het kunnen zien van `game-messages` tijdens de Pokemon battle.
+- [x] Het kunnen zien van een visuele `health-bar` die gelinkt is aan de Pokemon `health`
+- [ ] Als een gebruiker de battle room verlaat heeft de andere speler automatisch gewonnen.
 
-deze eisen zullen alleen aan bod komen als er tijd genoeg is
+**[C]** **Could haves**
 
-- [] 
+_deze eisen zullen alleen aan bod komen als er tijd genoeg is_
+
+- [ ] Het battle Interface design laten lijken op de ouderwetse Pokemon battles.
+- [x] Een limiet aan de lobbies toevoegen van twee spelers _(Disable option when full)_
+- [x] Pokemon attacks worden gebasseerd op de typering van de Pokemons.
+  - [x] Super Effective _(Water > Fire)_
+  - [x] Normal _(Water = Normal)_
+  - [x] Not Very Effective _(Fire < Water)_
+  - [x] No Effect _(Normal < Ghost)_
+- [ ] Tijdens een Pokemon battle kunnen gebruikers twee maal hun eigen Pokemon `healen`.
+
+
+**[C]** **Wont haves**
+
+_deze eisen zullen alleen aan bod komen als er tijd genoeg is_
+
+**Lobby**
+
+- [ ]  Het kunnen bewegen van jouw gekozen personage op de `city map`.
+- [ ]  Punten systeem dat wordt bijgehouden in een scoreboard systeem.
+- [ ]  Winkels maken waar gebruikers hun punten kunnen spenderen. _(Heal/ATT_BOOST/DEF_BOOST items)_
+- [ ]  Wanneer gebruikers tegen elkaar aanlopen of op elkaar klikken opent er een menu.
+  - [ ]  Gebruikers kunnen een battle starten.
+  - [ ]  Gebruikers kunnen elkaar toevoegen als vrienden _(Profile/friend system)_.
+  - [ ]  Gebruikers kunnen elkaars Pokemon zien.
+  - [ ]  Gebruikers kunnen in-game items met elkaar traden.
+  - [ ]  Gebruikers kunnen elkaars `balance` zien.
+- [ ] Mogelijkheid om tegen een `AI gym` te vechten om op deze manier `punten` te verdienen.
+
+---
+
+**Battle**
+
+- [ ] De gebruiker heeft de keuze uit vier Pokemon attacks die gerelateerd zijn aan de gekozen Pokemon.
+- [ ] Tijdens een Pokemon battle kan de gebruiker items gebruiken die hij/zij heeft gekocht.
 
 ## Installatie
 
