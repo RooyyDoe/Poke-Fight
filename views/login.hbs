@@ -37,14 +37,20 @@
                             <div class="pokemon-gyms">
                                 <label for="gym">Select your gym lobby</label><br>
                                 <select name="gym" id="pokemon-gyms" required>
-                                    <option value="pewter-gym">Pewter Gym</option>
-                                    <option value="cerulean-gym">Cerulean Gym</option>
-                                    <option value="vermilion-gym">Vermilion Gym</option>
-                                    <option value="celadon-gym">Celadon Gym</option>
-                                    <option value="fuchsia-gym">Fuchsia Gym</option>
-                                    <option value="saffron-gym">Saffron Gym</option>
-                                    <option value="cinnabar-gym">Cinnabar Gym</option>
-                                    <option value="viridian-gym">Viridian Gym</option>
+
+                                    {{#ifCond gyms.pewter_gym '2'}}
+                                    <option value="pewter-gym" disabled>Pewter Gym</option>
+                                    {{else}}
+                                    <option value="pewter_gym">Pewter Gym</option>
+                                    {{/ifCond}}
+
+                                    <option value="cerulean_gym">Cerulean Gym</option>
+                                    <option value="vermilion_gym">Vermilion Gym</option>
+                                    <option value="celadon_gym">Celadon Gym</option>
+                                    <option value="fuchsia_gym">Fuchsia Gym</option>
+                                    <option value="saffron_gym">Saffron Gym</option>
+                                    <option value="cinnabar_gym">Cinnabar Gym</option>
+                                    <option value="viridian_gym">Viridian Gym</option>
                                 </select>
                             </div>
                             <div class="gender-checkboxes">

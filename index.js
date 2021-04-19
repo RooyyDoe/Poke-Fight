@@ -17,10 +17,18 @@ const router = {
     lobby: require('./routes/lobby'),
 }
 
+const ifCond = (arg1, arg2, options) => {
+    return (arg1 >= arg2) ? options.fn(this) : options.inverse(this);
+}
+
+
 // Defining my template engine
 const hbs = exphbs.create({
     extname: '.hbs',
     defaultLayout: 'main',
+    helpers: {
+        ifCond: ifCond
+    }
 })
 
 //setting up the sockets

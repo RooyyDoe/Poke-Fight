@@ -10,7 +10,12 @@ lobbyRoute.use( (req, res) => {
 
     const users = userData.getUsersInGym(gym)
 
-    console.log(users.id)
+    console.log('test users', users.length)
+
+    if (users.length >= 2) {
+        return res.redirect('login')
+    }
+
 
     const user_info = {
         username: user,

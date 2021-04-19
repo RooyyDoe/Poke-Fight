@@ -84,7 +84,7 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
     const yourPokemon = document.getElementById('your-pokemon-image')
     const opponentsPokemon = document.getElementById('opponents-pokemon-image')
     const currentHealthP1 = document.getElementById('current-health-p1')
-    const currentHealthP2 = document.getElementById('current-health-p2')
+    // const currentHealthP2 = document.getElementById('current-health-p2')
 
     if(player1 === userInfo.username) {
         pokemonNameP1.textContent = pokemon2.name
@@ -96,7 +96,7 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
         yourPokemon.src = pokemon1.sprites.back
         opponentsPokemon.src = pokemon2.sprites.front
         currentHealthP1.textContent = pokemon1.health + ' / ' + pokemon1.in_health
-        currentHealthP2.textContent = pokemon2.health + ' / ' + pokemon2.in_health
+        // currentHealthP2.textContent = pokemon2.health + ' / ' + pokemon2.in_health
     } else {
         pokemonNameP1.textContent = pokemon1.name
         pokemonNameP2.textContent = pokemon2.name
@@ -107,7 +107,7 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
         yourPokemon.src = pokemon2.sprites.back
         opponentsPokemon.src = pokemon1.sprites.front
         currentHealthP1.textContent = pokemon2.health + ' / ' + pokemon2.in_health
-        currentHealthP2.textContent = pokemon1.health + ' / ' + pokemon1.in_health
+        // currentHealthP2.textContent = pokemon1.health + ' / ' + pokemon1.in_health
         document.querySelector(".attack-button").disabled = true
     }
     
@@ -128,7 +128,7 @@ socket.on('health-checker', (player1, pokemon1, pokemon2) => {
     const healthBarP1 = document.getElementById('health-output-p1')
     const healthBarP2 = document.getElementById('health-output-p2')
     const currentHealthP1 = document.getElementById('current-health-p1')
-    const currentHealthP2 = document.getElementById('current-health-p2')
+    // const currentHealthP2 = document.getElementById('current-health-p2')
 
     if(player1 === userInfo.username) {
         healthBarP1.value = pokemon1.health
@@ -143,7 +143,7 @@ socket.on('health-checker', (player1, pokemon1, pokemon2) => {
     }
 })
 
-// checks which players turn it is.
+// checks which players turn it is
 socket.on('turn-checker', (player1, turn_player1) => {
 
     if(player1 === userInfo.username) {
