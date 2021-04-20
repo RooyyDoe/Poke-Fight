@@ -28,27 +28,104 @@ Als de gebruiker zich aanmeldt om een pokemon trainer te worden, word die doorve
 
 - [Het concept](#het-concept)
 - [Features](#features)
-  - [Must haves](#[m]-must-haves)
+  - [Must haves](#features)
+  - [Should haves](#features)
+  - [Could haves](#features)
+  - [Wont haves](#features)  
+- [Installatie](#installatie)
+- [Ultieme applicatie schetsen](#ultieme-applicatie-schetsen)
+- [Data lifecycle diagram](#data-lifecycle-diagram)
+- [Socket server events](#socket-server-events)
+  - [On-join server events](#on-join-server-events)
+  - [Lobby server events](#lobby-server-events)
+  - [On-battle server events](#on-battle-server-events)   
+- [Socket client listeners](#socket-client-listeners)
+  - [On-join client events](#on-join-client-events)
+  - [Lobby client events](#lobby-client-events)
+  - [On-battle client events](#on-battle-client-events)  
+- [The RESTful Pokémon API](#the-restful-pokémon-api)
+- [Conclusie](#conclusie)
+- [Bronnen](#bronnen)
+- [Credits](#credits)
 
 ## Features
 
-### **[M]** **Must haves**
+Dit zijn de verschillende features die ik wil gaan toevoegen aan mijn applicatie _(MOSCOW)_
 
-deze eisen moeten in het eindresultaat terugkomen, zonder deze eisen is het product niet bruikbaar
+**[M]** **Must haves**
 
-- [] 
+_deze eisen moeten in het eindresultaat terugkomen, zonder deze eisen is het product niet bruikbaar_
 
-### **[S]** **Should haves**
+- [x] Het kunnen starten van een Pokemon battle wanneer er twee gebruikers aanwezig zijn in een lobby.
+- [x] Het kunnen uitvechten als twee pokemon trainers in een battle waar maar een iemand de winnaar kan zijn.
+  - [x] Het kunnen ophalen van `health` uit de Poké API.
+  - [x] Beurten systeem waar gebruikers elkaar omstebeurt kunnen aanvallen en door middel van deze aanvallen gaat de Pokemon `health` naar beneden _(player one starts)_.
+- [x] Victory/defeat message naar beide spelers.
 
-deze eisen zijn zeer gewenst, maar zonder is het product wel bruikbaar
+---
 
-- [] 
+**[S]** **Should haves**
 
-### **[C]** **Could haves**
+_deze eisen zijn zeer gewenst, maar zonder is het product wel bruikbaar_
 
-deze eisen zullen alleen aan bod komen als er tijd genoeg is
+- [x] Het kunnen inloggen als Pokemon-trainer.
+  - [x] _Naam_: Jouw eigen pokemon-trainer naam.
+  - [x] _Gym_: Dit zijn de verschillende lobbies die toegetreden kunnen worden.
+  - [x] _Gender_: De mogelijkheid om een vrouwelijke of mannelijke personage te kiezen.
+- [x] Het kunnen zien van een gebruikers lijst van de huidige lobby.
+- [x] Het kunnen zien van lobby notificaties.
+  - [x] Gebruikers krijgen een welkomst notificatie te zien als ze de lobby toetreden
+  - [x] Gebruikers krijgen een notificatie te zien wanneer er een gebruiker toetreedt of weggaat.
+- [x] Het kunnen zoeken en kiezen van een Pokemon om mee te gaan strijden.
+- [x] Het weergeven van een Pokemon gerelateerde huisstijl.
+- [x] Het kunnen zien van `game-messages` tijdens de Pokemon battle.
+- [x] Het kunnen zien van een visuele `health-bar` die gelinkt is aan de Pokemon `health`
+- [ ] Als een gebruiker de battle room verlaat heeft de andere speler automatisch gewonnen.
 
-- [] 
+**[C]** **Could haves**
+
+---
+
+_deze eisen zullen alleen aan bod komen als er tijd genoeg is_
+
+- [ ] Het battle Interface design laten lijken op de ouderwetse Pokemon battles.
+- [x] Een limiet aan de lobbies toevoegen van twee spelers _(Disable option when full)_
+- [ ] Er kunnen meerdere battles tegelijk plaats vinden.
+- [x] Pokemon attacks worden gebasseerd op de typering van de Pokemons.
+  - [x] Super Effective _(Water > Fire)_
+  - [x] Normal _(Water = Normal)_
+  - [x] Not Very Effective _(Fire < Water)_
+  - [x] No Effect _(Normal < Ghost)_
+- [ ] Tijdens een Pokemon battle kunnen gebruikers twee maal hun eigen Pokemon `healen`.
+
+
+**[C]** **Wont haves**
+
+---
+
+_deze eisen zullen alleen aan bod komen als er tijd genoeg is_
+
+**Lobby**
+
+- [ ]  Het kunnen bewegen van jouw gekozen personage op de `city map`.
+- [ ]  Punten systeem dat wordt bijgehouden in een scoreboard systeem.
+- [ ]  Winkels maken waar gebruikers hun punten kunnen spenderen. _(Heal/ATT_BOOST/DEF_BOOST items)_
+- [ ]  Wanneer gebruikers tegen elkaar aanlopen of op elkaar klikken opent er een menu.
+  - [ ]  Gebruikers kunnen een battle starten.
+  - [ ]  Gebruikers kunnen elkaar toevoegen als vrienden _(Profile/friend system)_.
+  - [ ]  Gebruikers kunnen elkaars Pokemon zien.
+  - [ ]  Gebruikers kunnen in-game items met elkaar traden.
+  - [ ]  Gebruikers kunnen elkaars `balance` zien.
+- [ ] Mogelijkheid om tegen een `AI gym` te vechten om op deze manier `punten` te verdienen.
+
+---
+
+**Battle**
+
+- [ ] De gebruiker heeft de keuze uit vier Pokemon attacks die gerelateerd zijn aan de gekozen Pokemon.
+- [ ] Tijdens een Pokemon battle kan de gebruiker items gebruiken die hij/zij heeft gekocht.
+
+---
 
 ## Installatie
 
@@ -122,7 +199,7 @@ Server runt dan op: **localhost:5000**
   
 </details>
 
-## Data life cycle
+## Data lifecycle diagram
 
 ![data-lifecycle-diagram](https://user-images.githubusercontent.com/40355914/115213956-57cd2200-a102-11eb-9ed4-ff4e7902913e.png)
 
@@ -221,15 +298,279 @@ Server runt dan op: **localhost:5000**
 
 </details>
 
-## API
+## The RESTful Pokémon API
 
+Dit is een `RESTful API` die zeer gedetailleerde objecten terug geeft die opgebouwd zijn uit duizende regels. De informatie uit deze API is volledig gerelateerd aan Pokémon en alles wat hierbij komt kijken. om deze `API` te gebruiken heb je geen authenticatie nodig en alle bronnen zijn volledig open en beschikbaar.
 
+<details> 
+  <summary>Welke data kan je uit deze API verkrijgen?</summary>
+  
+  - Moves
+  - Abilities
+  - Pokémon (Including various forms)
+  - Types
+  - Game versions
+  - Items
+  - Pokédexes
+  - Pokémon Evolution Chains
+
+</details>
+
+#### API call naar (endpoint) zonder `resource ID` of `name`
+
+Wanneer je de `API` aanroept zonder een ID of naam mee te geven krijg je het `object` hier beneden terug. Hier maken ze gebruik van pagination en je krijgt 20 resultaten per API aanroep. Als je het limiet van de resultaten wil vergroten kan je een `query parameter` mee geven om op deze manier meer resultaten terug te krijgen.
+
+```
+{
+  "count": 248,
+  "next": "https://pokeapi.co/api/v2/ability/?limit=20&offset=20",
+  "previous": null,
+  "results": [
+    {
+      "name": "stench",
+      "url": "https://pokeapi.co/api/v2/ability/1/"
+    }
+  ]
+}
+
+```
+
+#### De API calls die ik nodig had
+
+In eerste instantie heb ik de API (endpoint) nodig die één specifieke pokemon ophaalt doordat de gebruiker een search uitvoert. Als deze API call is gedaan kijk ik naar de `typering` die de pokémon heeft en doe met deze informatie nogmaals een API call om de `damage_relations` te verkrijgen uit de poké API
+
+```
+
+GET https://pokeapi.co/api/v2/pokemon/{id or name}/  // For the pokemon data
+
+GET https://pokeapi.co/api/v2/type/{id or name}/    // For the damage_relations data
+
+```
+
+<details>
+  <summary>RAW Json Pokémon API call</summary>
+  
+  ```
+  {
+  "id": 12,
+  "name": "butterfree",
+  "base_experience": 178,
+  "height": 11,
+  "is_default": true,
+  "order": 16,
+  "weight": 320,
+  "abilities": [
+    {
+      "is_hidden": true,
+      "slot": 3,
+      "ability": {
+        "name": "tinted-lens",
+        "url": "https://pokeapi.co/api/v2/ability/110/"
+      }
+    }
+  ],
+  "forms": [
+    {
+      "name": "butterfree",
+      "url": "https://pokeapi.co/api/v2/pokemon-form/12/"
+    }
+  ],
+  "game_indices": [
+    {
+      "game_index": 12,
+      "version": {
+        "name": "white-2",
+        "url": "https://pokeapi.co/api/v2/version/22/"
+      }
+    }
+  ],
+  "held_items": [
+    {
+      "item": {
+        "name": "silver-powder",
+        "url": "https://pokeapi.co/api/v2/item/199/"
+      },
+      "version_details": [
+        {
+          "rarity": 5,
+          "version": {
+            "name": "y",
+            "url": "https://pokeapi.co/api/v2/version/24/"
+          }
+        }
+      ]
+    }
+  ],
+  "location_area_encounters": "https://pokeapi.co/api/v2/pokemon/12/encounters",
+  "moves": [
+    {
+      "move": {
+        "name": "flash",
+        "url": "https://pokeapi.co/api/v2/move/148/"
+      },
+      "version_group_details": [
+        {
+          "level_learned_at": 0,
+          "version_group": {
+            "name": "x-y",
+            "url": "https://pokeapi.co/api/v2/version-group/15/"
+          },
+          "move_learn_method": {
+            "name": "machine",
+            "url": "https://pokeapi.co/api/v2/move-learn-method/4/"
+          }
+        }
+      ]
+    }
+  ],
+  "species": {
+    "name": "butterfree",
+    "url": "https://pokeapi.co/api/v2/pokemon-species/12/"
+  },
+  "sprites": {
+    "back_female": "http://pokeapi.co/media/sprites/pokemon/back/female/12.png",
+    "back_shiny_female": "http://pokeapi.co/media/sprites/pokemon/back/shiny/female/12.png",
+    "back_default": "http://pokeapi.co/media/sprites/pokemon/back/12.png",
+    "front_female": "http://pokeapi.co/media/sprites/pokemon/female/12.png",
+    "front_shiny_female": "http://pokeapi.co/media/sprites/pokemon/shiny/female/12.png",
+    "back_shiny": "http://pokeapi.co/media/sprites/pokemon/back/shiny/12.png",
+    "front_default": "http://pokeapi.co/media/sprites/pokemon/12.png",
+    "front_shiny": "http://pokeapi.co/media/sprites/pokemon/shiny/12.png",
+    "other": {
+      "dream_world": {},
+      "official-artwork": {}
+    },
+    "versions": {
+      "generation-i": {
+        "red-blue": {},
+        "yellow": {}
+      },
+      "generation-ii": {
+        "crystal": {},
+        "gold": {},
+        "silver": {}
+      },
+      "generation-iii": {
+        "emerald": {},
+        "firered-leafgreen": {},
+        "ruby-sapphire": {}
+      },
+      "generation-iv": {
+        "diamond-pearl": {},
+        "heartgold-soulsilver": {},
+        "platinum": {}
+      },
+      "generation-v": {
+        "black-white": {}
+      },
+      "generation-vi": {
+        "omegaruby-alphasapphire": {},
+        "x-y": {}
+      },
+      "generation-vii": {
+        "icons": {},
+        "ultra-sun-ultra-moon": {}
+      },
+      "generation-viii": {
+        "icons": {}
+      }
+    }
+  },
+  "stats": [
+    {
+      "base_stat": 70,
+      "effort": 0,
+      "stat": {
+        "name": "speed",
+        "url": "https://pokeapi.co/api/v2/stat/6/"
+      }
+    }
+  ],
+  "types": [
+    {
+      "slot": 2,
+      "type": {
+        "name": "flying",
+        "url": "https://pokeapi.co/api/v2/type/3/"
+      }
+    }
+  ]
+}
+  ```
+</details>
+  
+  Wat ik uiteindelijk nodig had voor mijn project was niet de volledige JSON. Daarom heb ik hiervoor een apart `object` gemaakt met hierin de benodigde informatie voor mijn applicatie.
+  
+  <details>
+    <summary>Mijn Pokémon object</summary>
+  
+  ```
+  
+  {
+    name: **String**,
+    sprites: {
+      display: **String**,
+      back: **String**,
+      front: **String**,
+    },
+    health: **String**,
+    in_health: **String**,
+    type: **String**,
+    weight: **String**,
+  }
+  
+  ```
+    
+  </details>
+  
+  
+  Uiteindelijk wilde ik dat de `damage_relations` ook bij dit object kwamen om op deze manier te beinvloeden welke types er meer of minder damage deden tegen elkaar.
+
+  
+  <details>
+    <summary>Mijn uiteindelijke pokémon Object</summary>
+  
+  ```
+  
+  {
+    name: **String**,
+    damage_relations: {
+      double_damage_from: [ Array ],
+      double_damage_to: [ Array ],
+      half_damage_from: [ Array ],
+      half_damage_to: [ Array ],
+      no_damage_from: [ Array ],
+      no_damage_to: [ Array ],
+    }.
+    sprites: {
+      display: **String**,
+      back: **String**,
+      front: **String**,
+    },
+    health: **String**,
+    in_health: **String**,
+    type: **String**,
+    weight: **String**,
+  }
+  
+  ```
+  
+  </details>
+  
+  
+  
+</details>
 
 ## Conclusie
 
 
-## Sources
+## Bronnen
 
-- [Mozilla Developer Network](https://developer.mozilla.org/en-US/) - I mostly used this site to obtain my sources
+- [Mozilla Developer Network](https://developer.mozilla.org/en-US/) - Hier haal ik de meeste Javascript kennis vandaan
+- [Socket IO documentatie](https://socket.io/docs/v4) - Basis socket IO documentatie
+- [API documentatie](https://pokeapi.co/docs/v2) - Alles wat ik nodig had om deze API te gebruiken
 
 ## Credits
+
+- [Thijs Spijker](https://github.com/iSirThijs) - Heeft me geholpen met een `could have` voor het lobby limiet.
+- [Isabella](https://github.com/Sideraa) - Mijn Rubberduck en metale steun.
