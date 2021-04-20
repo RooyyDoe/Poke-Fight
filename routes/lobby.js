@@ -10,8 +10,6 @@ lobbyRoute.use( (req, res) => {
 
     const users = userData.getUsersInGym(gym)
 
-    console.log('test users', users.length)
-
     if (users.length >= 2) {
         return res.redirect('/')
     }
@@ -25,7 +23,7 @@ lobbyRoute.use( (req, res) => {
     }
 
     res.render(`${gym}`, {
-        user_info
+        user_info,
     })
 })
 

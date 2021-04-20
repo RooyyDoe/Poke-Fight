@@ -5,6 +5,7 @@ const socket = io()
 const search_bar = document.getElementById('search')
 const search_button = document.getElementById('search-button')
 const attackButton = document.querySelector('.attack-button')
+const tooltip = document.querySelector('.tooltip')
 const infoElement = document.getElementById('user-info')
 const userInfo = {
     username: infoElement.getAttribute('user-name'),
@@ -15,10 +16,32 @@ const userInfo = {
 // send the just joined user-info to server-side
 socket.emit('join-lobby', userInfo)
 
+
+search_bar.addEventListener("keyup", (event) => {
+    event.preventDefault();
+
+    // User will be able to click on "enter" to search a pokemon.
+    if (event.keyCode === 13) {
+        search_button.click();
+        // removes the tooltip whenever a user has searched a pokemon
+        tooltip.remove()
+    }
+
+    // Shows tooltip when user has not filled in the search bar
+    if(search_bar.value === ''){
+        tooltip.style.visibility = "visible"
+    } else {
+        tooltip.style.visibility = "hidden"
+    }
+})
+
 // sends the search value to the server-side
 search_button.addEventListener("click", () => {
     socket.emit('search-results', search_bar.value)
+    // removes the tooltip whenever a user has searched a pokemon
+    tooltip.remove()
 })
+
 
 // gets pokemon data from server-side fetch call
 socket.on('return-search-results', (pokemonInfo) => {
@@ -44,6 +67,10 @@ socket.on('return-search-results', (pokemonInfo) => {
         gym: userInfo.gym,
         gender: userInfo.gender,
         pokemon: pokemonInfo
+    }
+
+    if(newUserData.pokemon) {
+        console.log('Selected a pokemon')
     }
 
     startButton.addEventListener('click', (event) => {
@@ -112,7 +139,7 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
     }
     
     // When 2 players joined the battle, the start button will be disabled. 
-    document.querySelector(".start-button").disabled = true
+    // document.querySelector(".start-button").disabled = true
 })
 
 // fires the on-attack socket from server side when player clicks on the attack button

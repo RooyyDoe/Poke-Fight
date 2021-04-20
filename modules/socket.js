@@ -34,7 +34,7 @@ module.exports = (io) => {
         socket.on('search-results', async input => {
 
             // Processing the search request and obtaining the pokemon data of the requested pokemon
-            const data = await pokemonData(input)
+            const data = await pokemonData(input.toLowerCase())
 
             const type = data.types[0].type.name
 

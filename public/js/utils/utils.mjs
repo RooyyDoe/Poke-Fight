@@ -44,6 +44,7 @@ export const userList = (users, currentUser) => {
 	const userList = document.getElementById('trainer-list')
     const startButton = document.querySelector('.start-button')
 
+
 	removeUserList(userList)
 
 	users.forEach(user => {
@@ -64,10 +65,12 @@ export const userList = (users, currentUser) => {
         list.append(img, p)
 	})
 
+
+
     if (users.length === 2) {
-        startButton.disabled = false
+        startButton.style.visibility = "visible"
     } else {
-        startButton.disabled = true
+        startButton.style.visibility = "hidden"
     }
 }
 
