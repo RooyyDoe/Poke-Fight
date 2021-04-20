@@ -1,13 +1,54 @@
 <body id="lobby">
 
-    <input type="hidden" id="user-info" user-name="{{ user_info.username }}" gym-name="{{ user_info.gymName }}"
-        gender="{{ user_info.gender }}">
+    <input type="hidden" id="user-info" user-id="{{users.id}}" user-name="{{ user_info.username }}"
+        gym-name="{{ user_info.gymName }}" gender="{{ user_info.gender }}">
 
     <main>
         <div class="lobby-container">
-            <img src="/images/celadon_city.png" alt="Pokemon Map">
             <div class="lobby-container-leftside">
-                <div class="join-element">
+                <img src="/images/celadon_city.png" alt="Pokemon Map">
+                <div class="container-leftside-content">
+                    <h2>Celadon City</h2>
+                    <div class="join-element">
+                    </div>
+                </div>
+            </div>
+            <div class="container-leftside-battle">
+                <div class="battle-container">
+                    <div class="opponent">
+                        <div class="opponents-pokemon-information">
+                            <p id="opponents-pokemon-name"></p>
+                            <label for="health-output">HP:</label>
+                            <progress id="health-output-p2"></progress>
+                        </div>
+                        <div class="opponents-pokemon">
+                            <img id="opponents-pokemon-image">
+                        </div>
+                    </div>
+                    <div class="you">
+                        <div class="your-pokemon">
+                            <img id="your-pokemon-image">
+                        </div>
+                        <div class="your-pokemon-information">
+                            <p id="your-pokemon-name"></p>
+                            <label for="health-output">HP:</label>
+                            <progress id="health-output-p1"></progress>
+                        </div>
+                    </div>
+                </div>
+                <div class="battle-message-container">
+                    <div class="message-output">
+                        <div class="message">
+                            <div class="battle-element">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attack-buttons">
+                        <button id="attack1" class="attack-button">Attack 1</button>
+                        <button id="attack2" class="attack-button">Attack 2</button>
+                        <button id="attack3" class="attack-button">Attack 3</button>
+                        <button id="attack4" class="attack-button">Attack 4</button>
+                    </div>
                 </div>
             </div>
             <div class="lobby-container-rightside">
@@ -21,10 +62,41 @@
                             <p>Trainers</p>
                         </div>
                     </div>
-                    <ul id="trainer-container">
-                    </ul>
+                    <div class="trainer-container">
+                        <ul id="trainer-list">
+                        </ul>
+                        <div class="start-button-container">
+                            <button class="start-button" disabled>Start battle!</button>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="bottomside-inside-container"></div>
+                <div class="bottomside-inside-container">
+                    <div class="search-container">
+                        <input id="search" type="search" placeholder="What pokemon do you want?" required />
+                        <button id="search-button" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="pokemon-image-container">
+                        <img id="pokemon-image">
+                        <h2 id="pokemon-name"></h2>
+                    </div>
+                    <div class="pokemon-information-container">
+                        <div class="pokemon-health">
+                            <p>Health</p>
+                            <p id="health"></p>
+                        </div>
+                        <div class="pokemon-type">
+                            <p>Type</p>
+                            <p id="type"></p>
+                        </div>
+                        <div class="pokemon-weight">
+                            <p>Weight</p>
+                            <p id="weight"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

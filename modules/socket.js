@@ -1,4 +1,4 @@
-const { joinGymLobby, getCurrentUser, getUsersInGym, userLeave} = require('./users')
+const { joinGymLobby, getCurrentUser, getNumberOfUserInAllGyms, getUsersInGym, userLeave} = require('./users')
 const { pokemonData, pokemonTypeData } = require('./pokemonData')
 
 module.exports = (io) => { 
@@ -87,6 +87,10 @@ module.exports = (io) => {
 
         socket.on('join-battle', (client) => {
             
+            const gyms = getNumberOfUserInAllGyms()
+
+            console.log('gyms', gyms.pewter_gym)
+
             if(user1_present) {
                 user2 = socket
                 user1_present = false //Reset value for next game
@@ -106,7 +110,7 @@ module.exports = (io) => {
         socket.on('on-attack', (userInfo) => {
 
             let attack = Math.round((Math.random() * 0.4 + 0.6) * 100)
-
+            
             if (turn_player1){
                 console.log('userInfo', pokemon2)
                 if (pokemon1.damage_relations.double_damage_to.includes(pokemon2.type)){

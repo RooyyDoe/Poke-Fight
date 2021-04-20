@@ -13,7 +13,7 @@ lobbyRoute.use( (req, res) => {
     console.log('test users', users.length)
 
     if (users.length >= 2) {
-        return res.redirect('login')
+        return res.redirect('/')
     }
 
 
