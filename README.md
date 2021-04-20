@@ -28,7 +28,25 @@ Als de gebruiker zich aanmeldt om een pokemon trainer te worden, word die doorve
 
 - [Het concept](#het-concept)
 - [Features](#features)
-  - [Must haves](#[m]-must-haves)
+  - [Must haves](#features)
+  - [Should haves](#features)
+  - [Could haves](#features)
+  - [Wont haves](#features)  
+- [Installatie](#installatie)
+- [Ultieme applicatie schetsen](#ultime-applicatie-schetsen)
+- [Data lifecycle diagram](#data-lifecycle-diagram)
+- [Socket server events](#socket-server-events)
+  - [On-join server events](#on-join-server-events)
+  - [Lobby server events](#lobby-server-events)
+  - [On-battle server events](#on-battle-server-events)   
+- [Socket client listeners](#socket-client-listeners)
+  - [On-join client events](#on-join-client-events)
+  - [Lobby client events](#lobby-client-events)
+  - [On-battle client events](#on-battle-client-events)  
+- [The RESTful Pokémon API](#the-restful-pokémon-api)
+- [Conclusie](#conclusie)
+- [Bronnen](#bronnen)
+- [Credits](#credits)
 
 ## Features
 
@@ -43,6 +61,8 @@ _deze eisen moeten in het eindresultaat terugkomen, zonder deze eisen is het pro
   - [x] Het kunnen ophalen van `health` uit de Poké API.
   - [x] Beurten systeem waar gebruikers elkaar omstebeurt kunnen aanvallen en door middel van deze aanvallen gaat de Pokemon `health` naar beneden _(player one starts)_.
 - [x] Victory/defeat message naar beide spelers.
+
+---
 
 **[S]** **Should haves**
 
@@ -64,10 +84,13 @@ _deze eisen zijn zeer gewenst, maar zonder is het product wel bruikbaar_
 
 **[C]** **Could haves**
 
+---
+
 _deze eisen zullen alleen aan bod komen als er tijd genoeg is_
 
 - [ ] Het battle Interface design laten lijken op de ouderwetse Pokemon battles.
 - [x] Een limiet aan de lobbies toevoegen van twee spelers _(Disable option when full)_
+- [ ] Er kunnen meerdere battles tegelijk plaats vinden.
 - [x] Pokemon attacks worden gebasseerd op de typering van de Pokemons.
   - [x] Super Effective _(Water > Fire)_
   - [x] Normal _(Water = Normal)_
@@ -77,6 +100,8 @@ _deze eisen zullen alleen aan bod komen als er tijd genoeg is_
 
 
 **[C]** **Wont haves**
+
+---
 
 _deze eisen zullen alleen aan bod komen als er tijd genoeg is_
 
@@ -99,6 +124,8 @@ _deze eisen zullen alleen aan bod komen als er tijd genoeg is_
 
 - [ ] De gebruiker heeft de keuze uit vier Pokemon attacks die gerelateerd zijn aan de gekozen Pokemon.
 - [ ] Tijdens een Pokemon battle kan de gebruiker items gebruiken die hij/zij heeft gekocht.
+
+---
 
 ## Installatie
 
@@ -271,15 +298,20 @@ Server runt dan op: **localhost:5000**
 
 </details>
 
-## API
+## The RESTful Pokémon API
 
 
 
 ## Conclusie
 
 
-## Sources
+## Bronnen
 
-- [Mozilla Developer Network](https://developer.mozilla.org/en-US/) - I mostly used this site to obtain my sources
+- [Mozilla Developer Network](https://developer.mozilla.org/en-US/) - Hier haal ik de meeste Javascript kennis vandaan
+- [Socket IO documentatie](https://socket.io/docs/v4) - Basis socket IO documentatie
+- [API documentatie](https://pokeapi.co/docs/v2) - Alles wat ik nodig had om deze API te gebruiken
 
 ## Credits
+
+- [Thijs Spijker](https://github.com/iSirThijs) - Heeft me geholpen met een `could have` voor het lobby limiet.
+- [Isabella](https://github.com/Sideraa) - Mijn Rubberduck en metale steun.
