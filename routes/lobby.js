@@ -11,7 +11,7 @@ lobbyRoute.use( (req, res) => {
     const users = userData.getUsersInGym(gym)
 
     if (users.length >= 2) {
-        return res.redirect('/')
+        return res.redirect(req.get('referer'));
     }
 
 

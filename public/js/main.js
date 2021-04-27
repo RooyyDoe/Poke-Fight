@@ -2,6 +2,7 @@ import * as utils from './utils/utils.mjs'
 
 const socket = io()
 
+const startButton = document.querySelector(".start-button")
 const search_bar = document.getElementById('search')
 const search_button = document.getElementById('search-button')
 const attackButton = document.querySelector('.attack-button')
@@ -16,6 +17,12 @@ const userInfo = {
 // send the just joined user-info to server-side
 socket.emit('join-lobby', userInfo)
 
+// When 2 players joined the battle, the start button will be disabled. 
+startButton.addEventListener('click', () => {
+    startButton.disabled = true
+    startButton.style.opacity = '.15'
+    startButton.style.cursor = 'default'
+})
 
 search_bar.addEventListener("keyup", (event) => {
     event.preventDefault();
@@ -53,7 +60,13 @@ socket.on('return-search-results', (pokemonInfo) => {
     const pokemonWeight = document.getElementById('weight')
     const lobby = document.querySelector('.lobby-container-leftside')
     const battle = document.querySelector('.container-leftside-battle')
+    const searchContainer = document.querySelector('.search-container')
     const startButton = document.querySelector('.start-button')
+
+    searchContainer.remove()
+    startButton.disabled = false
+    startButton.style.opacity = '1'
+    startButton.style.cursor = 'cursor'
     
     pokemonHealth.innerText = pokemonInfo.health
     pokemonType.innerText = pokemonInfo.type
@@ -67,10 +80,6 @@ socket.on('return-search-results', (pokemonInfo) => {
         gym: userInfo.gym,
         gender: userInfo.gender,
         pokemon: pokemonInfo
-    }
-
-    if(newUserData.pokemon) {
-        console.log('Selected a pokemon')
     }
 
     startButton.addEventListener('click', (event) => {
@@ -111,7 +120,6 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
     const yourPokemon = document.getElementById('your-pokemon-image')
     const opponentsPokemon = document.getElementById('opponents-pokemon-image')
     const currentHealthP1 = document.getElementById('current-health-p1')
-    // const currentHealthP2 = document.getElementById('current-health-p2')
 
     if(player1 === userInfo.username) {
         pokemonNameP1.textContent = pokemon2.name
@@ -123,7 +131,6 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
         yourPokemon.src = pokemon1.sprites.back
         opponentsPokemon.src = pokemon2.sprites.front
         currentHealthP1.textContent = pokemon1.health + ' / ' + pokemon1.in_health
-        // currentHealthP2.textContent = pokemon2.health + ' / ' + pokemon2.in_health
     } else {
         pokemonNameP1.textContent = pokemon1.name
         pokemonNameP2.textContent = pokemon2.name
@@ -134,12 +141,9 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
         yourPokemon.src = pokemon2.sprites.back
         opponentsPokemon.src = pokemon1.sprites.front
         currentHealthP1.textContent = pokemon2.health + ' / ' + pokemon2.in_health
-        // currentHealthP2.textContent = pokemon1.health + ' / ' + pokemon1.in_health
         document.querySelector(".attack-button").disabled = true
     }
     
-    // When 2 players joined the battle, the start button will be disabled. 
-    // document.querySelector(".start-button").disabled = true
 })
 
 // fires the on-attack socket from server side when player clicks on the attack button
@@ -188,13 +192,85 @@ socket.on('turn-checker', (player1, turn_player1) => {
     }
 })
 
-// game over state
-socket.on('game-over', () => {
-    utils.clearMessages()
-    document.querySelector(".attack-button").disabled = true
+socket.on('leave-buster', (users) => {
 
-    // setTimeout(() => {
-    //     window.location.href = '/'
-    // }, 5000);
+    const leaveTitle = document.querySelector('.leave-buster-title')
+    const leaveHeadMessage = document.querySelector('.head-leave-buster-message')
+    const leaveSubMessage = document.querySelector('.sub-leave-buster-message')
+    const leaveScreenOverlay = document.querySelector('.container-leftside-end-screen-back')
+    const leaveVictoryScreen = document.querySelector('.container-leftside-leave-buster')
+
+    console.log(users)
+
+    if(users.length === 2 ) {
+        leaveScreenOverlay.style.visibility = 'hidden'
+        leaveVictoryScreen.style.visibility = 'hidden'
+
+        document.querySelector(".attack-button").disabled = false
+        document.querySelector(".heal-button").disabled = false
+        document.querySelector(".leave-button").disabled = false
+    } else {
+        leaveScreenOverlay.style.visibility = 'visible'
+        leaveVictoryScreen.style.visibility = 'visible'
+
+        leaveTitle.textContent = 'Victory'
+        leaveHeadMessage.textContent = "You Have"
+        leaveSubMessage.textContent = "won the battle"
+
+        document.querySelector(".attack-button").disabled = true
+        document.querySelector(".heal-button").disabled = true
+        document.querySelector(".leave-button").disabled = true
+    }
+
 })
 
+// game over state
+socket.on('game-over', (player1, pokemon1, pokemon2) => {
+
+    const title = document.querySelector('.end-title')
+    const headMessage = document.querySelector('.head-end-message')
+    const subMessage = document.querySelector('.sub-end-message')
+    const pokemonImage = document.getElementById('end-pokemon')
+    const screenOverlay = document.querySelector('.container-leftside-end-screen-back')
+    const victoryScreen = document.querySelector('.container-leftside-end-screen')
+
+    console.log(player1, pokemon1, pokemon2)
+    console.log(player1 === userInfo.username)
+
+    screenOverlay.style.visibility = 'visible'
+    victoryScreen.style.visibility = 'visible'
+
+    if(player1 === userInfo.username) {
+        if(pokemon1.health === 0){
+            title.textContent = 'Defeat'
+            headMessage.textContent = "Your " + pokemon1.name
+            subMessage.textContent = "Has lost the battle"
+            pokemonImage.src = pokemon1.sprites.display
+            pokemonImage.style.opacity = ".25"
+        } else if (pokemon2.health === 0) {
+            title.textContent = 'Victory'
+            headMessage.textContent = "Your " + pokemon1.name
+            subMessage.textContent = "Has won the battle"
+            pokemonImage.src = pokemon1.sprites.display
+        }
+    } else {
+        if(pokemon2.health === 0) {
+            title.textContent = 'Defeat'
+            headMessage.textContent = "Your " + pokemon2.name
+            subMessage.textContent = "Has lost the battle"
+            pokemonImage.src = pokemon2.sprites.display
+            pokemonImage.style.opacity = ".25"
+        } else if (pokemon1.health === 0) {
+            title.textContent = 'Victory'
+            headMessage.textContent = "Your " + pokemon2.name
+            subMessage.textContent = "Has won the battle"
+            pokemonImage.src = pokemon2.sprites.display
+        }
+    }
+
+    utils.clearMessages()
+    document.querySelector(".attack-button").disabled = true
+    document.querySelector(".heal-button").disabled = true
+    document.querySelector(".leave-button").disabled = true
+
+})

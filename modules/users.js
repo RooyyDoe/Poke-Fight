@@ -7,8 +7,6 @@ const joinGymLobby = (id, username, gym, gender) => {
 
     users.push(userObj)
 
-    console.log('userList' , userObj)
-
     return userObj
 }
 
@@ -33,9 +31,7 @@ const getNumberOfUserInAllGyms = () => {
     }
 
     return users.reduce((acc, user) => {
-        console.log('first test', user.gym)
         acc[user.gym]++
-        console.log('second test', user.gym)
         return acc
     }, gyms)
 

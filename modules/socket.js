@@ -13,6 +13,8 @@ module.exports = (io) => {
 
         socket.on('join-lobby', (client) => {
 
+            console.log(socket.id)
+
             // Getting information of the user that joined the lobby
             const userInfo = joinGymLobby(socket.id, client.username, client.gym, client.gender)
 
@@ -28,6 +30,8 @@ module.exports = (io) => {
             // send users and gym info
             const users = getUsersInGym(client.gym)
             io.to(client.gym).emit('gym-users', users)
+
+            io.to(client.gym).emit('leave-buster', users)
 
         })
 
@@ -97,7 +101,7 @@ module.exports = (io) => {
                 username2 = client.username
                 pokemon2 = client.pokemon
                 io.to(user2.id).to(user1.id).emit('message', `The battle starts now! ${username1} starts.`)
-                io.to(client.gym).emit('battle-starts', username1, pokemon1, pokemon2)
+                io.to(client.gym).emit('battle-starts', username1, pokemon1, pokemon2, user1_present)
             } else {
                 user1 = socket
                 user1_present = true 
@@ -129,7 +133,7 @@ module.exports = (io) => {
                 if(pokemon2.health <= 0){
                     pokemon2.health = 0
                     io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2)
-                    io.to(userInfo.gym).emit('game-over')
+                    io.to(userInfo.gym).emit('game-over', username1, pokemon1, pokemon2)
                     user1.emit('message', `You have won the battle, congrats and goodluck on the next one`)
                     user2.emit('message', `${username1} won the battle, better luck next time!`)
                 } else {
@@ -155,7 +159,7 @@ module.exports = (io) => {
                 if(pokemon1.health <= 0){
                     pokemon1.health = 0
                     io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2)
-                    io.to(userInfo.gym).emit('game-over')
+                    io.to(userInfo.gym).emit('game-over', username1, pokemon1, pokemon2)
                     user1.emit('message', `${username2} won the battle, better luck next time!`)
                     user2.emit('message', `You have won the battle, congrats and goodluck on the next one`)
                 } else {
@@ -173,8 +177,12 @@ module.exports = (io) => {
             if (user) {
                 io.to(user.gym).emit('notification', `${user.username} has left the gym`)
 
+                io.to(user.gym).emit('message', `You have won the battle, start a new one!`)
+
                 const users = getUsersInGym(user.gym)
                 io.to(user.gym).emit('gym-users', users)
+
+                io.to(user.gym).emit('leave-buster', users)
             }
         })
     });

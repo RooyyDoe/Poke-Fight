@@ -46,11 +46,37 @@
                         </div>
                     </div>
                     <div class="attack-buttons">
-                        <button id="attack1" class="attack-button">Attack 1</button>
-                        <button id="attack2" class="attack-button">Attack 2</button>
-                        <button id="attack3" class="attack-button">Attack 3</button>
-                        <button id="attack4" class="attack-button">Attack 4</button>
+                        <button id="attack" class="attack-button">Attack</button>
+                        <button id="heal" class="heal-button">Heal</button>
+                        <button id="leave" class="leave-button">Leave</button>
                     </div>
+                </div>
+            </div>
+            <div class="container-leftside-end-screen-back">
+            </div>
+            <div class="container-leftside-end-screen">
+                <div class="end-screen-inner-wrap">
+                    <div class="header-end-screen">
+                        <h1 class="end-title"></h1>
+                    </div>
+                    <div class="content-end-screen">
+                        <h2 class="head-end-message"></h2>
+                        <p class="sub-end-message"></p>
+                        <img id="end-pokemon" src="" alt="end pokemon image">
+                    </div>
+                    <a class="back-button" href="/">Go back</a>
+                </div>
+            </div>
+            <div class="container-leftside-leave-buster">
+                <div class="leave-buster-inner-wrap">
+                    <div class="header-leave-buster">
+                        <h1 class="leave-buster-title"></h1>
+                    </div>
+                    <div class="content-leave-buster">
+                        <h2 class="head-leave-buster-message"></h2>
+                        <p class="sub-leave-buster-message"></p>
+                    </div>
+                    <a class="back-button" href="/">Go back</a>
                 </div>
             </div>
             <div class="lobby-container-rightside">
@@ -68,14 +94,14 @@
                         <ul id="trainer-list">
                         </ul>
                         <div class="start-button-container">
-                            <button class="start-button">Start battle!</button>
+                            <button class="start-button" disabled>Start battle!</button>
                         </div>
                     </div>
 
                 </div>
                 <div class="bottomside-inside-container">
                     <div class="search-container">
-                        <p class="tooltip">Choose your pokemon to join the fight</p>
+                        <p class="tooltip">Choose your pokemon before you join the fight</p>
                         <input type="search" id="search" value="pikachu" placeholder="What pokemon do you want?"
                             required />
                         <button id="search-button" type="submit">
