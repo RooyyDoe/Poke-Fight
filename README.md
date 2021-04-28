@@ -80,7 +80,8 @@ _deze eisen zijn zeer gewenst, maar zonder is het product wel bruikbaar_
 - [x] Het weergeven van een Pokemon gerelateerde huisstijl.
 - [x] Het kunnen zien van `game-messages` tijdens de Pokemon battle.
 - [x] Het kunnen zien van een visuele `health-bar` die gelinkt is aan de Pokemon `health`
-- [ ] Als een gebruiker de battle room verlaat heeft de andere speler automatisch gewonnen.
+- [x] Als een gebruiker de battle room verlaat heeft de andere speler automatisch gewonnen.
+- [x] Victory/Defeat pop-up nadat de battle over is.
 
 **[C]** **Could haves**
 
@@ -96,7 +97,9 @@ _deze eisen zullen alleen aan bod komen als er tijd genoeg is_
   - [x] Normal _(Water = Normal)_
   - [x] Not Very Effective _(Fire < Water)_
   - [x] No Effect _(Normal < Ghost)_
-- [ ] Tijdens een Pokemon battle kunnen gebruikers twee maal hun eigen Pokemon `healen`.
+- [ ] Tijdens een Pokemon battle kunnen gebruikers eenmaal hun eigen Pokemon `healen`.
+- [x] Tooltip die de gebruiker navigeert naar de `search` functionaliteit
+- [x] Error bericht wanneer gebruiker foute input geeft tijdens het zoeken van een pokemon.
 
 
 **[C]** **Wont haves**
@@ -201,7 +204,7 @@ Server runt dan op: **localhost:5000**
 
 ## Data lifecycle diagram
 
-![data-lifecycle-diagram](https://user-images.githubusercontent.com/40355914/115213956-57cd2200-a102-11eb-9ed4-ff4e7902913e.png)
+![data-lifecycle-diagram-roy](https://user-images.githubusercontent.com/40355914/116460784-bcf1e780-a867-11eb-8a77-2e43fe8c07ef.png)
 
 ## Socket server events
 
@@ -564,6 +567,8 @@ GET https://pokeapi.co/api/v2/type/{id or name}/    // For the damage_relations 
 ## Conclusie
 
 
+
+
 ## Bronnen
 
 - [Mozilla Developer Network](https://developer.mozilla.org/en-US/) - Hier haal ik de meeste Javascript kennis vandaan
@@ -572,5 +577,5 @@ GET https://pokeapi.co/api/v2/type/{id or name}/    // For the damage_relations 
 
 ## Credits
 
-- [Thijs Spijker](https://github.com/iSirThijs) - Heeft me geholpen met een `could have` voor het lobby limiet.
+- [Thijs Spijker](https://github.com/iSirThijs) - Heeft me geholpen met een `could have` voor het lobby limiet en meer..
 - [Isabella](https://github.com/Sideraa) - Mijn Rubberduck en metale steun.
