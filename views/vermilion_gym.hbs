@@ -18,8 +18,9 @@
                     <div class="opponent">
                         <div class="opponents-pokemon-information">
                             <p id="opponents-pokemon-name"></p>
-                            <label for="health-output">HP:</label>
+                            <label for="health-output">HP</label>
                             <progress id="health-output-p2"></progress>
+                            {{!-- <p id="current-health-p2"></p> --}}
                         </div>
                         <div class="opponents-pokemon">
                             <img id="opponents-pokemon-image">
@@ -31,8 +32,9 @@
                         </div>
                         <div class="your-pokemon-information">
                             <p id="your-pokemon-name"></p>
-                            <label for="health-output">HP:</label>
+                            <label for="health-output">HP</label>
                             <progress id="health-output-p1"></progress>
+                            <p id="current-health-p1"></p>
                         </div>
                     </div>
                 </div>
@@ -44,11 +46,36 @@
                         </div>
                     </div>
                     <div class="attack-buttons">
-                        <button id="attack1" class="attack-button">Attack 1</button>
-                        <button id="attack2" class="attack-button">Attack 2</button>
-                        <button id="attack3" class="attack-button">Attack 3</button>
-                        <button id="attack4" class="attack-button">Attack 4</button>
+                        <button id="attack" class="attack-button" disabled>Attack</button>
+                        <button id="heal" class="heal-button" disabled>Heal</button>
                     </div>
+                </div>
+            </div>
+            <div class="container-leftside-end-screen-back">
+            </div>
+            <div class="container-leftside-end-screen">
+                <div class="end-screen-inner-wrap">
+                    <div class="header-end-screen">
+                        <h1 class="end-title"></h1>
+                    </div>
+                    <div class="content-end-screen">
+                        <h2 class="head-end-message"></h2>
+                        <p class="sub-end-message"></p>
+                        <img id="end-pokemon" src="" alt="end pokemon image">
+                    </div>
+                    <a class="back-button" href="/">Go back</a>
+                </div>
+            </div>
+            <div class="container-leftside-leave-buster">
+                <div class="leave-buster-inner-wrap">
+                    <div class="header-leave-buster">
+                        <h1 class="leave-buster-title"></h1>
+                    </div>
+                    <div class="content-leave-buster">
+                        <h2 class="head-leave-buster-message"></h2>
+                        <p class="sub-leave-buster-message"></p>
+                    </div>
+                    <a class="back-button" href="/">Go back</a>
                 </div>
             </div>
             <div class="lobby-container-rightside">
@@ -73,11 +100,14 @@
                 </div>
                 <div class="bottomside-inside-container">
                     <div class="search-container">
-                        <input id="search" type="search" placeholder="What pokemon do you want?" required />
+                        <p class="tooltip">Choose your pokemon before you join the fight</p>
+                        <input type="search" id="search" value="pikachu" placeholder="What pokemon do you want?"
+                            required />
                         <button id="search-button" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
+                    <p id="error" class="errorMessage"></p>
                     <div class="pokemon-image-container">
                         <img id="pokemon-image">
                         <h2 id="pokemon-name"></h2>

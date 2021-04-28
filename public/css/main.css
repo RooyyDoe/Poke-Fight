@@ -242,7 +242,8 @@ progress[value] {
 
 .battle-message {
   font-family: "Pokemon GB", sans-serif;
-  padding: 50px;
+  padding: 50px 0px;
+  font-size: 0.9em;
 }
 
 .message-output {
@@ -682,7 +683,6 @@ a:hover {
 }
 
 .attack-button,
-.leave-button,
 .heal-button {
   font-family: "Pokemon GB", sans-serif;
   padding: 0px 10px;
@@ -812,6 +812,13 @@ input[type="radio"]:checked + label > img {
 /* Misc
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+.errorMessage {
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0.3em 1em;
+  color: rgb(219, 8, 41);
+}
+
 .intro-text {
   text-align: center;
   padding: 120px 40px;
@@ -895,6 +902,33 @@ input[type="radio"]:checked + label > img {
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5));
 }
 
+.attack {
+  animation: attackForward 500ms 1 ease-in forwards;
+}
+
+.fadeInLeft {
+  animation: slideInReverse 800ms 1 ease-in forwards;
+}
+
+.fadeInRight {
+  animation: slideIn 800ms 1 ease-in forwards;
+}
+
+.damage {
+  animation: damageIndicator 1000ms 1 ease-in forwards;
+}
+
+#damageIndicator {
+  position: absolute;
+  right: 32%;
+  top: 35%;
+  padding: 10px;
+  color: #fff;
+  border: 3px solid black;
+  border-radius: 50px;
+  background-color: rgb(219, 8, 41);
+}
+
 /* Animaties
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
@@ -910,6 +944,18 @@ input[type="radio"]:checked + label > img {
   }
 }
 
+@keyframes slideInReverse {
+  from {
+    opacity: 0%;
+    transform: translate(-100%);
+  }
+
+  to {
+    opacity: 100%;
+    transform: translate(0);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0%;
@@ -917,6 +963,47 @@ input[type="radio"]:checked + label > img {
 
   to {
     opacity: 100%;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 100%;
+  }
+
+  to {
+    opacity: 0%;
+  }
+}
+
+@keyframes damageIndicator {
+  from {
+    opacity: 100%;
+    top: 35%;
+  }
+
+  to {
+    opacity: 0%;
+    top: 5%;
+  }
+}
+
+@keyframes attackForward {
+  0% {
+    left: 20%;
+    bottom: 5%;
+  }
+  30% {
+    left: 25%;
+    bottom: 10%;
+  }
+  60% {
+    left: 19%;
+    bottom: 4%;
+  }
+  100% {
+    left: 20%;
+    bottom: 5%;
   }
 }
 
