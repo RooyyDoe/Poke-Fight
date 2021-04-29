@@ -267,6 +267,13 @@ Server runt dan op: **localhost:5000**
 
 </details>
 
+<details> 
+  <summary>leave-buster</summary>
+  
+  Deze socket houd bij hoeveel gebruikers er in de lobby zitten tijdens de battle. Wanneer een gebruiker de battle verlaat zonder hem af te maken zal de andere speler een victory scherm te zien krijgen.
+
+</details>
+
 
 ## Socket client listeners
 
@@ -298,6 +305,13 @@ Server runt dan op: **localhost:5000**
   <summary>on-attack</summary>
   
   Elke keer wanneer een gebruiker op de `attack` knop drukt, wordt er een event gestuurd naar de `server-side`. Hier worden alle functionaliteiten zoals de `health-checker` en `turn-checker` afgehandeld.
+
+</details>
+
+<details> 
+  <summary>on-heal</summary>
+  
+  Elke keer wanneer een gebruiker op de `heal` knop drukt, wordt er een event gestuurd naar de `server-side`. Hier worden alle functionaliteiten zoals de `health-checker` en `turn-checker` afgehandeld.
 
 </details>
 
