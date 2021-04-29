@@ -216,19 +216,7 @@ socket.on('battle-starts', (player1, pokemon1, pokemon2) => {
 // ROCKET SIENCE -> https://css-tricks.com/restart-css-animation/
 attackButton.addEventListener('click', (event) => {
     event.preventDefault()
-
-    // const healthp2 = document.getElementById('health-output-p2')
     const yourPokemon = document.getElementById('your-pokemon-image')
-    // const battleContainer = document.querySelector('.battle-container')
-    // const damageIndicator = document.createElement('p')
-
-    // damageIndicator.id = 'damageIndicator'
-    // damageIndicator.textContent = '50'
-    // damageIndicator.classList.add('damage')
-
-    // setTimeout(() => {
-    //     damageIndicator.remove()
-    // }, 1500);
 
 
     // -> removing the class
@@ -266,6 +254,7 @@ socket.on('health-checker', (player1, pokemon1, pokemon2, attack) => {
 
     // checks who is player 1 and who is player 2
     if(player1 === userInfo.username) {
+        
         healthBarP1.value = pokemon1.health
         healthBarP2.value = pokemon2.health  
         currentHealthP1.textContent = pokemon1.health + ' / ' + pokemon1.in_health
@@ -275,20 +264,20 @@ socket.on('health-checker', (player1, pokemon1, pokemon2, attack) => {
         currentHealthP1.textContent = pokemon2.health + ' / ' + pokemon2.in_health
     }
 
-    if(attack) {
-        const battleContainer = document.querySelector('.battle-container')
-        const damageIndicator = document.createElement('p')
+    // if(attack) {
+    //     const battleContainer = document.querySelector('.battle-container')
+    //     const damageIndicator = document.createElement('p')
     
-        damageIndicator.id = 'damageIndicator'
-        damageIndicator.textContent = attack
-        damageIndicator.classList.add('damage')
+    //     damageIndicator.id = 'damageIndicator'
+    //     damageIndicator.textContent = attack
+    //     damageIndicator.classList.add('damage')
     
-        setTimeout(() => {
-            damageIndicator.remove()
-        }, 1500);
+    //     setTimeout(() => {
+    //         damageIndicator.remove()
+    //     }, 1500);
     
-        battleContainer.append(damageIndicator)
-    }
+    //     battleContainer.append(damageIndicator)
+    // }
 
 })
 
