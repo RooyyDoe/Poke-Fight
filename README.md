@@ -24,6 +24,15 @@ Als de gebruiker zich aanmeldt om een pokemon trainer te worden, wordt die doorv
 
 <img width="1552" alt="Schermafbeelding 2021-04-09 om 11 03 58" src="https://user-images.githubusercontent.com/40355914/114157065-863d4700-9923-11eb-9c94-cd02f79d2fbe.png">
 
+<details>
+  <summary>Battle simulation!!</summary>
+  
+  ![ezgif-2-a817eab2a3cf](https://user-images.githubusercontent.com/40355914/116524485-bdc26200-a8d7-11eb-853e-67e3b2feddf9.gif)
+
+</details>
+
+
+
 ## inhoudsopgave
 
 - [Het concept](#het-concept)
