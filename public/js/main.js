@@ -34,7 +34,7 @@ search_bar.addEventListener("keyup", (event) => {
     if (event.keyCode === 13) {
         search_button.click();
         // removes the tooltip whenever a user has searched a pokemon
-        tooltip.remove()
+        tooltip.style.visibility = 'hidden'
     }
 
     // Shows tooltip when user has not filled in the search bar
@@ -64,7 +64,7 @@ search_button.addEventListener("click", () => {
     }
     
     // removes the tooltip whenever a user has searched a pokemon
-    tooltip.remove()
+    tooltip.style.visibility = 'hidden'
 })
 
 // gets pokemon data from server-side fetch call
@@ -346,15 +346,18 @@ socket.on('leave-buster', (users) => {
         
         leaveScreenOverlay.style.visibility = 'visible'
         leaveVictoryScreen.style.visibility = 'visible'
-        tooltip.style.visibility = 'hidden'
-        searchContainer.style.visibility = 'hidden'
-
+        
         leaveTitle.textContent = 'Victory'
         leaveHeadMessage.textContent = "You Have"
         leaveSubMessage.textContent = "won the battle"
 
         document.querySelector(".attack-button").disabled = true
         document.querySelector(".heal-button").disabled = true
+
+        if(tooltip && searchContainer) {
+            tooltip.style.visibility = 'hidden'
+            searchContainer.style.visibility = 'hidden'
+        }
     }
 
 })
