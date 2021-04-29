@@ -244,8 +244,6 @@ attackButton.addEventListener('click', (event) => {
     // -> and re-adding the class
     yourPokemon.classList.add('attack')
 
-    // battleContainer.append(damageIndicator)
-
     utils.clearMessages()
     socket.emit('on-attack', userInfo)
 }, false)
@@ -260,7 +258,7 @@ healButton.addEventListener('click', (event) => {
 })
 
 // Checks the health of the pokemons
-socket.on('health-checker', (player1, pokemon1, pokemon2) => {
+socket.on('health-checker', (player1, pokemon1, pokemon2, attack) => {
 
     const healthBarP1 = document.getElementById('health-output-p1')
     const healthBarP2 = document.getElementById('health-output-p2')
@@ -276,6 +274,22 @@ socket.on('health-checker', (player1, pokemon1, pokemon2) => {
         healthBarP2.value = pokemon1.health  
         currentHealthP1.textContent = pokemon2.health + ' / ' + pokemon2.in_health
     }
+
+    if(attack) {
+        const battleContainer = document.querySelector('.battle-container')
+        const damageIndicator = document.createElement('p')
+    
+        damageIndicator.id = 'damageIndicator'
+        damageIndicator.textContent = attack
+        damageIndicator.classList.add('damage')
+    
+        setTimeout(() => {
+            damageIndicator.remove()
+        }, 1500);
+    
+        battleContainer.append(damageIndicator)
+    }
+
 })
 
 // checks which players turn it is

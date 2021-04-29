@@ -142,7 +142,7 @@ module.exports = (io) => {
                 } else {
 
                 // checks the health of the pokemon after each attack
-                io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2)
+                io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2, attack)
 
                 // Gives the turn to player 2
                 turn_player1 = false 
@@ -173,7 +173,7 @@ module.exports = (io) => {
                     user1.emit('message', `The foe's ${pokemon1.name} fainted!`)
                     user2.emit('message', `${pokemon1.name} fainted!`)
                 } else {
-                io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2)
+                io.to(userInfo.gym).emit('health-checker', username1, pokemon1, pokemon2, attack)
 
                 // gives back the turn to player 1
                 turn_player1 = true

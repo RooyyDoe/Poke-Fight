@@ -919,13 +919,15 @@ input[type="radio"]:checked + label > img {
 }
 
 #damageIndicator {
+  font-family: "Pokemon GB", sans-serif;
+  font-weight: bold;
   position: absolute;
-  right: 32%;
-  top: 35%;
-  padding: 10px;
+  right: 30%;
+  top: 30%;
+  padding: 0.8em 0.5em 0.5em;
   color: #fff;
-  border: 3px solid black;
-  border-radius: 50px;
+  border-radius: 20em;
+  border: 3px solid rgba(0, 0, 0, 0.75);
   background-color: rgb(219, 8, 41);
 }
 
