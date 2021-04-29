@@ -267,6 +267,13 @@ Server runt dan op: **localhost:5000**
 
 </details>
 
+<details> 
+  <summary>leave-buster</summary>
+  
+  Deze socket houd bij hoeveel gebruikers er in de lobby zitten tijdens de battle. Wanneer een gebruiker de battle verlaat zonder hem af te maken zal de andere speler een victory scherm te zien krijgen.
+
+</details>
+
 
 ## Socket client listeners
 
@@ -298,6 +305,13 @@ Server runt dan op: **localhost:5000**
   <summary>on-attack</summary>
   
   Elke keer wanneer een gebruiker op de `attack` knop drukt, wordt er een event gestuurd naar de `server-side`. Hier worden alle functionaliteiten zoals de `health-checker` en `turn-checker` afgehandeld.
+
+</details>
+
+<details> 
+  <summary>on-heal</summary>
+  
+  Elke keer wanneer een gebruiker op de `heal` knop drukt, wordt er een event gestuurd naar de `server-side`. Hier worden alle functionaliteiten zoals de `health-checker` en `turn-checker` afgehandeld.
 
 </details>
 
@@ -566,7 +580,11 @@ GET https://pokeapi.co/api/v2/type/{id or name}/    // For the damage_relations 
 
 ## Conclusie
 
+Voordat ik aan dit vak was begonnen had ik een doel voor mijzelf gesteld. Dit doel was om een zo uitgebreid mogelijke real-time applicatie te bouwen. Vorig jaar is me dit niet gelukt en ik wilde mijzelf bewijzen dit jaar. Dit is mij zeker gelukt en ben hartstikke trots op het eind resultaat wat ik heb neer gezet. In eerste instantie wilde ik gewoon een pokemon battle maken waar twee speler tegen elkaar konden gaan spelen zonder teveel moeilijke functionaliteiten. Uiteindelijk is de applicatie toch een stuk groter geworden dan ik had verwacht en kwamen hier verschillende moeilijkheden bij kijken. Het bijhouden van `player1` en `player2` en alles wat hierbij kwam kijken vond ik lastig, maar deste meer tijd ik in het project had besteedt, lukte het me steeds beter. Ook het begrijpen van de sockets ging me steeds beter af, waardoor ik nog meer functionaliteiten kon toevoegen aan de applicatie.
 
+De manier waarop de rubric is gemaakt vond ik erg lastig. Je wordt erg open gelaten in wat je kan doen en je moet eigenlijk zelf uitzoeken hoe je een hoger cijfer haalt dan een 5.5. Ik heb er natuurlijk zoveel mogelijk uitgehaald en heb geprobeerd wel degelijk meer te doen dan de basis van de rubric, maar toch weet ik nog steeds niet precies waar ik sta. Achteraf had ik hier misschien wat meer sturing in gehad. 
+
+al met al heb ik weer erg van dit vak genoten, ook al heb ik veel lastige momenten gehad waar ik echt niet meer wist hoe ik verder kon gaan. Door het volhouden en hulp vragen wanneer nodig heb ik het goed voor elkaar gekregen.
 
 
 ## Bronnen
